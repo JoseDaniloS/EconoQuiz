@@ -13,8 +13,8 @@ const team = [
   },
   {
     name: "Jessica",
-    github: "https://github.com/seuusuario",
-    linkedin: "https://linkedin.com/in/seulinkedin",
+    github: "https://github.com/Jessicaisabela",
+    linkedin: "https://www.linkedin.com/in/jessica-isabela-887881372/",
   },
 ];
 
@@ -23,52 +23,53 @@ export default function Footer() {
     <footer className="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm px-4 bg-gray-50">
       {/* Mensagem sobre ODS */}
       <div className="flex justify-between max-md:flex-col max-w-4xl mx-auto">
-          <p className="mb-2">
-            <span className="sm:hidden">
-              Desenvolvido para promover a educação sobre os ODS
-            </span>
-            <span className="hidden sm:inline">
-              Desenvolvido para promover a educação sobre os Objetivos de
-              Desenvolvimento Sustentável
-            </span>
-          </p>
-          {/* Equipe */}
-          <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-2">
-            <span className="font-semibold text-gray-700">Desenvolvido por:</span>
-            <div className="flex gap-4 flex-col">
-              {team.map((member, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between max-md:justify-center items-center gap-2"
-                >
-                  <span>{member.name}</span>
-                  <div className="flex gap-3">
-                      <a
-                        href={member.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-gray-800"
-                      >
-                        <FaGithub />
-                      </a>
-                      <a
-                        href={member.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-gray-800"
-                      >
-                        <FaLinkedin />
-                      </a>
-                  </div>
+        <p className="mb-2">
+          <span className="sm:hidden">
+            Desenvolvido para promover a educação sobre os ODS
+          </span>
+          <span className="hidden sm:inline">
+            Desenvolvido para promover a educação sobre os Objetivos de
+            Desenvolvimento Sustentável
+          </span>
+        </p>
+        {/* Equipe */}
+        <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-2">
+          <span className="font-semibold text-gray-700">Desenvolvido por:</span>
+          <div className="flex gap-4 flex-col">
+            {team.map((member, index) => (
+              <div
+                key={index}
+                className="flex justify-between max-md:justify-center items-center gap-2"
+              >
+                <span>{member.name}</span>
+                <div className="flex gap-3">
+                  <a
+                    href={member.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gray-800"
+                  >
+                    <FaGithub />
+                  </a>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gray-800"
+                  >
+                    <FaLinkedin />
+                  </a>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
       </div>
 
       {/* Copyright opcional */}
       <p className="mt-2 text-gray-400 text-xs">
-        &copy; {new Date().getFullYear()} ODS 8 Quiz - Projeto de Teste de Software 2025.2 - UFERSA
+        &copy; {new Date().getFullYear()} ODS 8 Quiz - Projeto de Teste de
+        Software 2025.2 - UFERSA
       </p>
     </footer>
   );

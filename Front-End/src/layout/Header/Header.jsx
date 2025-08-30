@@ -16,7 +16,7 @@ export function Header({ isAnimated }) {
           </div>
           <div>
             <h1 className="text-lg sm:text-2xl font-bold">
-              Trilha do Trabalho Justo
+              EconoQuiz
             </h1>
             <p className="text-white/80 text-xs sm:text-sm">
               ODS 8 - Trabalho Decente{" "}

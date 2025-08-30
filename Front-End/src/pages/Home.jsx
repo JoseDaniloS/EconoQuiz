@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { FaPlay, FaTrophy, FaUsers, FaBook} from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setIsAnimated(true);
@@ -85,7 +87,7 @@ export default function HomePage() {
               {/* Botão principal responsivo */}
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
-                onClick={() => alert("Iniciando o jogo...")}
+                onClick={() => navigate("/play")}
               >
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <div className="relative flex items-center justify-center space-x-3">
