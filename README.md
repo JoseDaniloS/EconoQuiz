@@ -1,1 +1,1 @@
-# Trilha-do-Trabalho-Justo
+# Econoquiz
