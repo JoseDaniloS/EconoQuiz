@@ -29,7 +29,7 @@ export default function HeaderGameScreen() {
   }, []);
 
   return (
-    <div className="w-full rounded-2xl p-4 mb-2">
+    <div className="w-full relative rounded-2xl p-4 mb-2">
       {/* Linha superior: Progresso e Timer */}
       <div className="flex justify-between items-center mb-3">
         {/* Progresso da questão */}

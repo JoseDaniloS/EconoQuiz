@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaPlay, FaTrophy, FaUsers, FaBook} from "react-icons/fa";
+import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsAnimated(true);
@@ -85,6 +85,7 @@ export default function HomePage() {
               </div>
 
               {/* Botão principal responsivo */}
+              
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
                 onClick={() => navigate("/play")}
@@ -100,6 +101,7 @@ export default function HomePage() {
 
             {/* Cards de recursos responsivos */}
             <div
+              
               className={`space-y-4 sm:grid sm:grid-cols-3 sm:gap-8 sm:space-y-0 mb-8 sm:mb-16 transform transition-all duration-1000 delay-500 ${
                 isAnimated
                   ? "translate-y-0 opacity-100"
@@ -155,6 +157,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+            
 
             {/* Seção informativa sobre ODS 8 responsiva */}
             <div
