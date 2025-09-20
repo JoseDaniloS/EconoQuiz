@@ -1,36 +1,39 @@
-import { motion } from "framer-motion";
-import { FaCircle, FaSquare } from "react-icons/fa";
-import { BsTriangleFill, BsDiamondFill } from "react-icons/bs";
+import {
+  FaBriefcase,
+  FaChartLine,
+  FaClock,
+  FaLeaf,
+} from "react-icons/fa";
 import AnswerCardGameScreen from "./AnsewerCard";
 
 export default function QuestionCard() {
   const answers = [
     {
-      text: "Apenas aumentar salários",
-      color: "#E21B3C",
-      icon: <BsTriangleFill />,
-    }, // Vermelho
+      text: "Promover empregos de qualidade",
+      color: "#D32F2F", // Laranja do ODS 8
+      icon: <FaBriefcase />,
+    },
     {
-      text: "Garantir direitos trabalhistas e condições seguras",
-      color: "#1368CE",
-      icon: <FaSquare />,
-    }, // Azul
+      text: "Garantir direitos e segurança no trabalho",
+      color: "#1976D2", // Laranja claro complementar
+      icon: <FaChartLine />,
+    },
     {
-      text: "Reduzir a jornada de trabalho",
-      color: "#D89E00",
-      icon: <FaCircle />,
-    }, // Amarelo
+      text: "Incentivar crescimento econômico sustentável",
+      color: "#FBC02D", // Laranja escuro mais intenso
+      icon: <FaClock />,
+    },
     {
-      text: "Eliminar todos os empregos informais",
-      color: "#26890C",
-      icon: <BsDiamondFill />,
-    }, // Verde
+      text: "Aumentar produtividade com inovação",
+      color: "#388E3C", // Tom pastel para balancear
+      icon: <FaLeaf />,
+    },
   ];
 
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-4  w-full">
       {answers.map((answer, index) => (
-        <AnswerCardGameScreen key={index} answer={answer}  />
+        <AnswerCardGameScreen key={index} answer={answer} />
       ))}
     </div>
   );
