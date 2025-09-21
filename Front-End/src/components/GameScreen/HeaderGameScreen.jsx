@@ -5,6 +5,9 @@ import QuestionProgressHeaderGameScreen from "./HeaderGameScreen/QuestionProgres
 import TimerHeaderGameScreen from "./HeaderGameScreen/Timer";
 import ActiveStreakHeaderGameScreen from "./HeaderGameScreen/ActiveStreak";
 
+import useSound from "use-sound";
+import startSoundFile from "/sounds/som-start.mp3"; 
+
 export const DURATION_ANSWER = 15;
 
 export default function HeaderGameScreen() {
@@ -14,22 +17,30 @@ export default function HeaderGameScreen() {
   const streak = [true, true, true, false];
   const [timeLeft, setTimeLeft] = useState(DURATION_ANSWER);
 
+  const [playStartSound, { stop }] = useSound(startSoundFile, { volume: 0.5 });
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev === 0) {
           clearInterval(timer);
+          stop(); 
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+    playStartSound();
+
+    return () => {
+      clearInterval(timer);
+      stop();
+    };
+  }, [playStartSound, stop]);
 
   return (
-    <div className="w-full rounded-2xl p-4 mb-2">
+    <div className="w-full relative rounded-2xl p-4 mb-2">
       {/* Linha superior: Progresso e Timer */}
       <div className="flex justify-between items-center mb-3">
         {/* Progresso da questão */}
