@@ -6,16 +6,16 @@ export class User {
     id,
     username,
     password,
-    pontos,
-    nivel,
+    points,
+    level,
     createdAt,
     isHashed = false
   ) {
     this.id = id || uuidv7();
     this.username = username;
     this.password = isHashed ? password : bcrypt.hashSync(password, 8);
-    this.pontos = pontos ?? 0;
-    this.nivel = nivel ?? 1;
+    this.points = points ?? 0;
+    this.level = level ?? 1;
     this.createdAt = createdAt || new Date().toISOString();
   }
 
@@ -26,39 +26,43 @@ export class User {
     return bcrypt.compareSync(password, this.password);
   }
 
-  setNivel(nivel) {
-    this.nivel = nivel;
+  setLevel(level) {
+    this.level = level;
   }
 
-  setPontos(pontos) {
-    this.pontos = pontos;
+  setPoints(points) {
+    this.points = points;
   }
 
-  getPontos() {
-    return this.pontos;
+  getPoints() {
+    return this.points;
   }
 
   toPublicObject() {
     return {
       id: this.id,
       username: this.username,
-      pontos: this.pontos,
-      nivel: this.nivel,
+      points: this.points,
+      level: this.level,
       createdAt: this.createdAt,
     };
   }
 
+
+  //Metodo estatioc para criar um novo usuario
   static createNewUser(username, password) {
     return new User(null, username, password, 0, 1, null, false);
   }
 
+
+  //Metodo estatico para criar um usuario a partir do banco de dados
   static fromDatabase(item) {
     return new User(
       item.id,
       item.username,
       item.password,
-      item.pontos,
-      item.nivel,
+      item.points,
+      item.level,
       item.createdAt,
       true
     );
