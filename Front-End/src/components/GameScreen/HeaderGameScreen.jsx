@@ -6,7 +6,7 @@ import TimerHeaderGameScreen from "./HeaderGameScreen/Timer";
 import ActiveStreakHeaderGameScreen from "./HeaderGameScreen/ActiveStreak";
 
 import useSound from "use-sound";
-import startSoundFile from "/sounds/som-start.mp3"; 
+import startSoundFile from "/sounds/audio-gamer.mp3"; 
 
 export const DURATION_ANSWER = 15;
 
@@ -17,7 +17,7 @@ export default function HeaderGameScreen() {
   const streak = [true, true, true, false];
   const [timeLeft, setTimeLeft] = useState(DURATION_ANSWER);
 
-  const [playStartSound, { stop }] = useSound(startSoundFile, { volume: 0.5 });
+  const [playStartSound, { stop }] = useSound(startSoundFile, { volume: 0.7 });
 
   useEffect(() => {
     const timer = setInterval(() => {
