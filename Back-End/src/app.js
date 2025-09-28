@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import authUser from "./routes/AuthUser.js";
+import play from "./routes/Play.js"
 
 
 dotenv.config();
@@ -15,5 +16,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", authUser);
+app.use("/play", play)
 
 export default app;

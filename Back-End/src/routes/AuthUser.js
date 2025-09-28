@@ -6,7 +6,7 @@ import { generateToken } from "../utils/jwt.js";
 
 const router = Router();
 
-const TABLE_NAME = process.env.DYNAMO_DB_TABLE_USER;
+export const TABLE_NAME = process.env.DYNAMO_DB_TABLE_USER;
 
 router.post("/registro", async (req, res) => {
   const { username, password } = req.body;
