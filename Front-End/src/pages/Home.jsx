@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FaPlay, FaTrophy, FaUsers, FaBook, FaSignInAlt, FaTimes } from "react-icons/fa";
+import {
+  FaPlay,
+  FaTrophy,
+  FaUsers,
+  FaBook,
+  FaSignInAlt,
+  FaTimes,
+} from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { HomeMusic } from "../components/Audio/HomeAudio/Index.js";  // ← Importação ADICIONADA
+import { HomeMusic } from "../components/Audio/HomeAudio/Index.js"; // ← Importação ADICIONADA
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
@@ -44,73 +51,11 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">
-      <HomeMusic />  {/* ← Componente de música ADICIONADO aqui */}
-
-      {/* BOTÃO DE LOGIN FIXO NO CANTO ESQUERDO */}
-      <button
-        onClick={() => setShowLogin(true)}
-        className="fixed top-4 left-4 z-50 bg-primary text-white px-4 py-2 rounded-lg flex items-center space-x-2 shadow-lg hover:bg-primary-dark transition-colors"
-      >
-        <FaSignInAlt />
-        <span>Login</span>
-      </button>
-
-      {/* MODAL DE LOGIN */}
-      {showLogin && (
-        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
-          <div className="bg-white rounded-3xl p-8 sm:p-12 w-11/12 sm:w-96 relative shadow-2xl">
-            <button
-              onClick={() => setShowLogin(false)}
-              className="absolute top-4 right-4 text-gray-600 hover:text-primary transition-colors"
-            >
-              <FaTimes className="w-6 h-6" />
-            </button>
-            <h2 className="text-2xl font-bold text-primary mb-6 text-center">Login</h2>
-            <form onSubmit={handleLogin} className="flex flex-col space-y-4">
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-                required
-              />
-              <input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-                required
-              />
-              <div className="flex justify-between items-center text-sm text-gray-700">
-                <label className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={remember}
-                    onChange={(e) => setRemember(e.target.checked)}
-                    className="w-4 h-4"
-                  />
-                  <span>Lembrar</span>
-                </label>
-                <a href="#" className="hover:text-primary">Esqueceu a senha?</a>
-              </div>
-              <button
-                type="submit"
-                className="bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
-              >
-                Entrar
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
+      <HomeMusic /> {/* ← Componente de música ADICIONADO aqui */}
       {/* Elementos decorativos de fundo */}
       <div className="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
       <div className="absolute top-1/3 right-1/4 w-12 h-12 sm:w-16 sm:h-16 bg-success/20 rounded-full blur-lg animate-pulse delay-500"></div>
-
       {/* Container responsivo */}
       <div className="w-full mx-auto bg-white sm:bg-transparent shadow-2xl sm:shadow-none">
         {/* Header responsivo */}
@@ -160,7 +105,7 @@ export default function HomePage() {
               {/* Botão principal responsivo */}
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
-                onClick={() => navigate("/play")}
+                onClick={() => navigate("/login")}
               >
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <div className="relative flex items-center justify-center space-x-3">
@@ -253,7 +198,12 @@ export default function HomePage() {
                 </span>
               </p>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                {["Trabalho Decente","Crescimento","Igualdade","Sustentabilidade"].map((tag, index) => (
+                {[
+                  "Trabalho Decente",
+                  "Crescimento",
+                  "Igualdade",
+                  "Sustentabilidade",
+                ].map((tag, index) => (
                   <span
                     key={index}
                     className="bg-white text-primary px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-sm"
