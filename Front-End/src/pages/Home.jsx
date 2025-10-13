@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
+import { FaPlay, FaTrophy, FaUsers, FaBook, FaSignInAlt, FaTimes } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ import { HomeMusic } from "../components/Audio/HomeAudio/Index.js";  // ← Impo
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [showLogin, setShowLogin] = useState(false); // controle do modal de login
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,10 +37,75 @@ export default function HomePage() {
     },
   ];
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    alert(`Email: ${email}\nSenha: ${password}\nLembrar: ${remember}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">
       <HomeMusic />  {/* ← Componente de música ADICIONADO aqui */}
-      
+
+      {/* BOTÃO DE LOGIN FIXO NO CANTO ESQUERDO */}
+      <button
+        onClick={() => setShowLogin(true)}
+        className="fixed top-4 left-4 z-50 bg-primary text-white px-4 py-2 rounded-lg flex items-center space-x-2 shadow-lg hover:bg-primary-dark transition-colors"
+      >
+        <FaSignInAlt />
+        <span>Login</span>
+      </button>
+
+      {/* MODAL DE LOGIN */}
+      {showLogin && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 w-11/12 sm:w-96 relative shadow-2xl">
+            <button
+              onClick={() => setShowLogin(false)}
+              className="absolute top-4 right-4 text-gray-600 hover:text-primary transition-colors"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+            <h2 className="text-2xl font-bold text-primary mb-6 text-center">Login</h2>
+            <form onSubmit={handleLogin} className="flex flex-col space-y-4">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                required
+              />
+              <input
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                required
+              />
+              <div className="flex justify-between items-center text-sm text-gray-700">
+                <label className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    checked={remember}
+                    onChange={(e) => setRemember(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                  <span>Lembrar</span>
+                </label>
+                <a href="#" className="hover:text-primary">Esqueceu a senha?</a>
+              </div>
+              <button
+                type="submit"
+                className="bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors"
+              >
+                Entrar
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Elementos decorativos de fundo */}
       <div className="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
@@ -88,7 +158,6 @@ export default function HomePage() {
               </div>
 
               {/* Botão principal responsivo */}
-              
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
                 onClick={() => navigate("/play")}
@@ -104,7 +173,6 @@ export default function HomePage() {
 
             {/* Cards de recursos responsivos */}
             <div
-              
               className={`space-y-4 sm:grid sm:grid-cols-3 sm:gap-8 sm:space-y-0 mb-8 sm:mb-16 transform transition-all duration-1000 delay-500 ${
                 isAnimated
                   ? "translate-y-0 opacity-100"
@@ -118,7 +186,6 @@ export default function HomePage() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Layout mobile: horizontal */}
                   <div className="flex items-center space-x-4 sm:hidden">
                     <div
                       className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 ${
@@ -130,7 +197,7 @@ export default function HomePage() {
                       {feature.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-bold text-text mb-1 group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-sm font-bold text-text mb-1 group-hover:text-primary transition-colors">
                         {feature.title}
                       </h3>
                       <p className="text-xs text-gray-600 leading-relaxed">
@@ -139,7 +206,6 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Layout desktop: vertical */}
                   <div className="hidden sm:block">
                     <div
                       className={`inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6 transition-all duration-300 ${
@@ -150,7 +216,7 @@ export default function HomePage() {
                     >
                       {feature.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
@@ -160,7 +226,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            
 
             {/* Seção informativa sobre ODS 8 responsiva */}
             <div
@@ -188,12 +253,7 @@ export default function HomePage() {
                 </span>
               </p>
               <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                {[
-                  "Trabalho Decente",
-                  "Crescimento",
-                  "Igualdade",
-                  "Sustentabilidade",
-                ].map((tag, index) => (
+                {["Trabalho Decente","Crescimento","Igualdade","Sustentabilidade"].map((tag, index) => (
                   <span
                     key={index}
                     className="bg-white text-primary px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-sm"
@@ -206,7 +266,7 @@ export default function HomePage() {
             </div>
           </div>
         </main>
-        {/* Footer responsivo */}
+
         <Footer />
       </div>
     </div>

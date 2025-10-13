@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import GameScreen from './pages/GameScreen'
@@ -17,6 +16,7 @@ function App() {
       </Routes>
     </Router>
   )
+ 
 }
 
 export default App
