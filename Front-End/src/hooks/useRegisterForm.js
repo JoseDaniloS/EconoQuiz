@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/registerSchema";
+import { RegisterUser } from "../api/UserFetch";
 
 export function useRegisterForm() {
   const {
@@ -13,11 +14,9 @@ export function useRegisterForm() {
     mode: "onBlur",
   });
 
-  const handleRegister = (data) => {
-    console.log("✅ Dados de registro:", data);
-    // Aqui você pode chamar a API de cadastro, por exemplo:
-    // await api.post("/register", data);
-    reset();
+  const handleRegister = async (data) => {
+    await RegisterUser(data);
+  
   };
 
   return {

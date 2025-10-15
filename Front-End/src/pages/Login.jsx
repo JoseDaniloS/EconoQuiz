@@ -76,7 +76,7 @@ export default function LoginPage() {
 
       {/* Container */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md max-md:w-[90vw]">
           <div className="bg-white rounded-3xl shadow-2xl p-8 border-4 border-red-600 relative overflow-hidden">
             <div className="absolute inset-0 opacity-5">
               <div className="grid grid-cols-6 gap-4 p-4">
