@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export async function RegisterUser(user) {
   try {
@@ -6,11 +7,10 @@ export async function RegisterUser(user) {
       import.meta.env.VITE_API_URL + "/auth/registro",
       user
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (error.response) {
-      console.log(error.response.data);
+      toast.error(error.response.data);
     }
   }
 }
@@ -21,10 +21,10 @@ export async function LoginUser(user) {
       import.meta.env.VITE_API_URL + "/auth/login",
       user
     );
-    return response.data.token;
+    return response.data;
   } catch (error) {
     if (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   }
 }

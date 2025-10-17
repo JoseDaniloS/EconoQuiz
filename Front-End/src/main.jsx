@@ -3,13 +3,20 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import MainRoutes from "./routes/routes.jsx";
+import { AccountProvider } from "./hooks/useAccountContext.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { PlayProvider } from "./hooks/usePlayContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ToastContainer position="top-right" autoClose={3000} />
     <BrowserRouter>
-      <MainRoutes />
+      <AccountProvider>
+        <PlayProvider>
+          <MainRoutes />
+        </PlayProvider>
+      </AccountProvider>
     </BrowserRouter>
   </StrictMode>
 );
-
-
