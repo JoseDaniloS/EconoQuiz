@@ -7,11 +7,25 @@ import Background0 from "/0.jpg";
 import Background1 from "/1.jpg";
 import Background2 from "/2.jpg";
 import Background3 from "/3.jpg";
+import { usePlay } from "../hooks/usePlayContext.jsx";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useMemo } from "react";
 
 export default function GameScreen() {
-  const randomScreenNumber = Math.floor(Math.random() * 4);
+  const randomScreenNumber = useMemo(() => Math.floor(Math.random() * 4), []);
 
   const backgroundImages = [Background0, Background1, Background2, Background3];
+  const { searchQuestions } = usePlay();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const loadQuestions = async () => {
+      await searchQuestions(id);
+    };
+    loadQuestions();
+  }, [id, searchQuestions]);
 
   return (
     <motion.div
@@ -32,9 +46,6 @@ export default function GameScreen() {
 
       <HeaderGameScreen />
       <div className="w-full relative h-full p-5 mt-auto flex flex-col items-center justify-between">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Qual é a meta principal do trabalho decente?
-        </h2>
         <QuestionCard />
         <PopUp />
       </div>

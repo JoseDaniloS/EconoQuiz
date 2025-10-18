@@ -1,40 +1,43 @@
-import {
-  FaBriefcase,
-  FaChartLine,
-  FaClock,
-  FaLeaf,
-} from "react-icons/fa";
+import { memo, useEffect } from "react";
+import { FaBriefcase, FaChartLine, FaClock, FaLeaf } from "react-icons/fa";
 import AnswerCardGameScreen from "./AnsewerCard";
+import { usePlay } from "../../hooks/usePlayContext";
 
-export default function QuestionCard() {
-  const answers = [
-    {
-      text: "Promover empregos de qualidade",
-      color: "#D32F2F", // Laranja do ODS 8
-      icon: <FaBriefcase />,
-    },
-    {
-      text: "Garantir direitos e segurança no trabalho",
-      color: "#1976D2", // Laranja claro complementar
-      icon: <FaChartLine />,
-    },
-    {
-      text: "Incentivar crescimento econômico sustentável",
-      color: "#FBC02D", // Laranja escuro mais intenso
-      icon: <FaClock />,
-    },
-    {
-      text: "Aumentar produtividade com inovação",
-      color: "#388E3C", // Tom pastel para balancear
-      icon: <FaLeaf />,
-    },
-  ];
+function QuestionCard() {
+  const { questions, questaoAtual } = usePlay();
+  const question = questions?.[questaoAtual];
+
+  if (!question) {
+    return (
+      <div className="text-center text-gray-200 font-semibold">
+        Carregando pergunta...
+      </div>
+    );
+  }
+
+  const icons = [<FaBriefcase />, <FaChartLine />, <FaClock />, <FaLeaf />];
+  const colors = ["#D32F2F", "#1976D2", "#FBC02D", "#388E3C"];
+
+  const answers =
+    question.options?.map((option, index) => ({
+      text: option,
+      color: colors[index % colors.length],
+      icon: icons[index % icons.length],
+    })) || [];
 
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 gap-4  w-full">
-      {answers.map((answer, index) => (
-        <AnswerCardGameScreen key={index} answer={answer} />
-      ))}
-    </div>
+    <>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        {question.statement}
+      </h2>
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4 w-full">
+        {answers.map((answer, index) => (
+          <AnswerCardGameScreen key={index} answer={answer} />
+        ))}
+      </div>
+    </>
   );
 }
+
+// ✅ Exporta o componente memorizado
+export default memo(QuestionCard);

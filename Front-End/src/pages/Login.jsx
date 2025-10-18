@@ -12,7 +12,10 @@ import {
   FaCogs,
   FaStar,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAccountContext } from "../hooks/useAccountContext";
+import { verifyTokenFetch } from "../api/VerifyToken";
 
 export default function LoginPage() {
   const {
@@ -21,6 +24,23 @@ export default function LoginPage() {
     formState: { errors },
     handleLogin,
   } = useLoginForm();
+
+  const { token } = useAccountContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const verify = async () => {
+      if (!token) {
+        return;
+      }
+
+      const valid = await verifyTokenFetch(token);
+      if (valid) {
+        navigate("/play");
+      }
+    };
+    verify();
+  }, [token]);
 
   return (
     <div

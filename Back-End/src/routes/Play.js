@@ -4,61 +4,67 @@ import { GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { Partida } from "../class/Partida.js";
 import docClient from "../config/database.js";
 import { verificarSeUsuarioExiste } from "../validations/userValidation.js";
-import { User } from "../class/User.js";
+import { Difficulty } from "../class/Difficulty.js";
+import { alreadyPlay } from "../validations/playAlready.js";
 
 const router = Router();
-
 const TABLE_NAME_PARTIDAS = process.env.DYNAMO_DB_TABLE_PARTIDA;
+
 router.post("/", authToken, async (req, res) => {
-  const { id } = req.body || {};
+  const { id, difficulty } = req.body;
 
   if (!id) {
     return res.status(400).json({ message: "ID obrigatorio!" });
   }
+
+  if (!difficulty) {
+    return res.status(400).json({ message: "Dificuldade obrigatoria!" });
+  }
+
+  let dificuldade;
+  try {
+    dificuldade = new Difficulty(difficulty);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+
   const usuarioExistente = await verificarSeUsuarioExiste(id);
   if (!usuarioExistente) {
     return res.status(404).json({ message: "Usuario não existe" });
   }
-    const objetoUsuario = User.fromDatabase(usuarioExistente);
-    const usuarioPlano = objetoUsuario.toPublicObject()
-  
 
-  const partida = new Partida(null, usuarioPlano);
+  const partida = new Partida(id, dificuldade.level);
+
   const command = new PutCommand({
     TableName: TABLE_NAME_PARTIDAS,
-    Item: partida,
+    Item: partida.toPublicObject(),
   });
 
-    try {
+  try {
     await docClient.send(command);
-    return res
-      .status(201)
-      .json({ message: "Partida criada com sucesso!", id: partida.id });
+    return res.status(201).json({
+      message: "Partida criada com sucesso!",
+      partida: partida.toPublicObject(),
+    });
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Erro ao criar partida", error: error });
+      .json({ message: "Erro ao criar partida", error: error.message });
   }
 });
 
 router.get("/:id", authToken, async (req, res) => {
-  const { id } = req.params;
-
-  const command = new GetCommand({
-    TableName: TABLE_NAME_PARTIDAS,
-    Key: { id },
-  });
   try {
-    const result = await docClient.send(command);
+    const { id } = req.params;
+    const partida = await alreadyPlay(id);
 
-    if (!result.Item) {
+    if (!partida) {
       return res.status(404).json({ message: "Partida não encontrada" });
     }
-    return res.json(result.Item);
+
+    return res.status(200).json(partida);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erro ao buscar partida", error: error });
+    return res.status(500).json({ message: error.message });
   }
 });
 

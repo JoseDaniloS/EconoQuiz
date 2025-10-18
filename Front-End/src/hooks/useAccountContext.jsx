@@ -1,29 +1,58 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+import { verifyTokenFetch } from "../api/VerifyToken";
 
 const AccountContext = createContext();
 
-// 🔐 Provider que vai envolver toda a aplicação
 export function AccountProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem("token") || null);
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
-  // Salva o token no localStorage sempre que mudar
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-    } else {
-      localStorage.removeItem("token");
+  const checkToken = useCallback(async () => {
+    if (!token) {
+      clearStorage();
+      return;
     }
-  }, [token]);
 
-  // Função para login
+    try {
+      await verifyTokenFetch(token); // se não lançar erro → token válido
+      persistSession(token, user);
+    } catch (error) {
+      console.error("Token inválido ou expirado:", error);
+      logout();
+    }
+  }, [token, user]);
+
+  useEffect(() => {
+    checkToken();
+  }, [checkToken]);
+
+  const persistSession = (tokenValue, userData) => {
+    localStorage.setItem("token", tokenValue);
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
+
+  const clearStorage = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
+
   const login = (tokenValue, userData) => {
     setToken(tokenValue);
     setUser(userData);
+    persistSession(tokenValue, userData);
   };
 
-  // Função para logout
   const logout = () => {
+    clearStorage();
     setToken(null);
     setUser(null);
   };
@@ -35,7 +64,6 @@ export function AccountProvider({ children }) {
   );
 }
 
-// 🔄 Hook para acessar o contexto
 export function useAccountContext() {
   const context = useContext(AccountContext);
   if (!context) {
