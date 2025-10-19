@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
+import { FaPlay, FaTrophy, FaUsers, FaBook, FaUser } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { HomeMusic } from "../components/Audio/HomeAudio/Index.js";  // ← Importação ADICIONADA
+import { HomeMusic } from "../components/Audio/HomeAudio/Index.js";
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,27 +35,75 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">
-      <HomeMusic />  {/* ← Componente de música ADICIONADO aqui */}
-      
-      {/* Elementos decorativos de fundo */}
+      <HomeMusic />
+
+      {/* Botão de Login */}
+      <button
+        onClick={() => setShowLogin(true)}
+        className="absolute top-6 left-6 z-50 bg-primary text-white px-4 py-2 rounded-full shadow-md hover:bg-primary-dark flex items-center space-x-2"
+      >
+        <FaUser />
+        <span className="hidden sm:inline">Login</span>
+      </button>
+
+      {/* Tela de Login */}
+      {showLogin && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl w-80 sm:w-96 p-6 relative">
+            <button
+              onClick={() => setShowLogin(false)}
+              className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold"
+            >
+              ✕
+            </button>
+            <h2 className="text-2xl font-bold text-center text-primary mb-6">
+              Acesse sua conta
+            </h2>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-600 mb-1">
+                  Usuário
+                </label>
+                <input
+                  type="text"
+                  className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Digite seu usuário"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-600 mb-1">
+                  Senha
+                </label>
+                <input
+                  type="password"
+                  className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Digite sua senha"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition"
+              >
+                Entrar
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Fundo decorativo */}
       <div className="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
       <div className="absolute top-1/3 right-1/4 w-12 h-12 sm:w-16 sm:h-16 bg-success/20 rounded-full blur-lg animate-pulse delay-500"></div>
 
-      {/* Container responsivo */}
       <div className="w-full mx-auto bg-white sm:bg-transparent shadow-2xl sm:shadow-none">
-        {/* Header responsivo */}
         <Header isAnimated={isAnimated} />
 
-        {/* Conteúdo principal responsivo */}
         <main className="px-4 py-6 sm:px-6 sm:py-12">
           <div className="max-w-sm mx-auto sm:max-w-4xl">
-            {/* Seção principal com call-to-action */}
             <div
               className={`text-center mb-8 sm:mb-16 transform transition-all duration-1000 delay-300 ${
-                isAnimated
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`}
             >
               <div className="mb-6 sm:mb-8">
@@ -87,8 +136,6 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Botão principal responsivo */}
-              
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
                 onClick={() => navigate("/play")}
@@ -98,17 +145,12 @@ export default function HomePage() {
                   <FaPlay className="w-5 h-5 sm:w-6 sm:h-6" />
                   <span>Jogar Agora</span>
                 </div>
-                <div className="hidden sm:block absolute inset-0 -top-full bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:top-full transition-all duration-700 -rotate-12 w-full"></div>
               </button>
             </div>
 
-            {/* Cards de recursos responsivos */}
             <div
-              
               className={`space-y-4 sm:grid sm:grid-cols-3 sm:gap-8 sm:space-y-0 mb-8 sm:mb-16 transform transition-all duration-1000 delay-500 ${
-                isAnimated
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`}
             >
               {features.map((feature, index) => (
@@ -118,7 +160,6 @@ export default function HomePage() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Layout mobile: horizontal */}
                   <div className="flex items-center space-x-4 sm:hidden">
                     <div
                       className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 ${
@@ -139,7 +180,6 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Layout desktop: vertical */}
                   <div className="hidden sm:block">
                     <div
                       className={`inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6 transition-all duration-300 ${
@@ -160,53 +200,24 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            
 
-            {/* Seção informativa sobre ODS 8 responsiva */}
             <div
               className={`bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-center transform transition-all duration-1000 delay-700 ${
-                isAnimated
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-10 opacity-0"
+                isAnimated ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
               }`}
             >
               <h3 className="text-lg sm:text-2xl font-bold text-text mb-3 sm:mb-4">
                 Sobre o ODS 8
               </h3>
               <p className="text-xs sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6 sm:max-w-3xl sm:mx-auto">
-                <span className="sm:hidden">
-                  Promove crescimento econômico sustentável, emprego pleno e
-                  trabalho decente para todos. Aprenda como contribuir para um
-                  mundo do trabalho mais justo.
-                </span>
-                <span className="hidden sm:inline">
-                  O Objetivo de Desenvolvimento Sustentável 8 busca promover o
-                  crescimento econômico sustentado, inclusivo e sustentável,
-                  emprego pleno e produtivo e trabalho decente para todos.
-                  Através deste jogo, você aprenderá como contribuir para um
-                  mundo do trabalho mais justo e equitativo.
-                </span>
+                O Objetivo de Desenvolvimento Sustentável 8 busca promover o
+                crescimento econômico sustentado, inclusivo e sustentável,
+                emprego pleno e produtivo e trabalho decente para todos.
               </p>
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                {[
-                  "Trabalho Decente",
-                  "Crescimento",
-                  "Igualdade",
-                  "Sustentabilidade",
-                ].map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-white text-primary px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium shadow-sm"
-                  >
-                    <span className="sm:hidden">{tag.split(" ")[0]}</span>
-                    <span className="hidden sm:inline">{tag}</span>
-                  </span>
-                ))}
-              </div>
             </div>
           </div>
         </main>
-        {/* Footer responsivo */}
+
         <Footer />
       </div>
     </div>
