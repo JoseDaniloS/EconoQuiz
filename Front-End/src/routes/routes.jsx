@@ -15,7 +15,10 @@ export default function MainRoutes() {
       <Route path="/register" element={<RegisterPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/play" element={<SelectDifficulty />} />
-        <Route path="/play/:id/:difficulty" element={<GameScreen />} />
+        <Route
+          path="/play/:id_partida/:difficulty/:id_question"
+          element={<GameScreen />}
+        />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

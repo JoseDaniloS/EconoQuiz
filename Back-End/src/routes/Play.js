@@ -6,6 +6,7 @@ import docClient from "../config/database.js";
 import { verificarSeUsuarioExiste } from "../validations/userValidation.js";
 import { Difficulty } from "../class/Difficulty.js";
 import { alreadyPlay } from "../validations/playAlready.js";
+import { getQuestions } from "../utils/getQuestions.js";
 
 const router = Router();
 const TABLE_NAME_PARTIDAS = process.env.DYNAMO_DB_TABLE_PARTIDA;
@@ -33,7 +34,9 @@ router.post("/", authToken, async (req, res) => {
     return res.status(404).json({ message: "Usuario não existe" });
   }
 
-  const partida = new Partida(id, dificuldade.level);
+  const questions = await getQuestions(difficulty);
+
+  const partida = new Partida(id, dificuldade.level, questions);
 
   const command = new PutCommand({
     TableName: TABLE_NAME_PARTIDAS,

@@ -14,6 +14,10 @@ export class Difficulty {
     this.weight = Difficulty.WEIGHTS[level];
   }
 
+  static getWeights(level) {
+    return Difficulty.WEIGHTS[level]
+  }
+
   getLevel() {
     return this.level
   }

@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  FaPlay,
-  FaTrophy,
-  FaUsers,
-  FaBook,
-  FaSignInAlt,
-  FaTimes,
-} from "react-icons/fa";
+import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { HomeMusic } from "../components/Audio/HomeAudio/Index.js"; // ← Importação ADICIONADA
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [showLogin, setShowLogin] = useState(false); // controle do modal de login
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,11 +31,6 @@ export default function HomePage() {
       description: "Ganhe pontos e desbloqueie conquistas",
     },
   ];
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    alert(`Email: ${email}\nSenha: ${password}\nLembrar: ${remember}`);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">

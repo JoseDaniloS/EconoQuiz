@@ -1,27 +1,35 @@
 import { uuidv7 } from "uuidv7";
 
 export class Partida {
-  constructor(id, difficulty) {
+  constructor(id, difficulty, questions = []) {
     this.id = id || uuidv7();
-    this.answeredQuestions = [];
-    this.questions = []; // logica para buscar em um banco de dados as questões de medio facil e dificil
-    this.correctSequence = 0;
     this.difficulty = difficulty;
-  }
-
-  startMatch() {
-    //logica para iniciar a partida
+    this.questions = questions;
+    this.answeredQuestions = [];
+    this.correctSequence = 0;
+    this.score = 0;
   }
 
   getCorrectSequence() {
     return this.correctSequence;
   }
 
-  proximaQuestão(questao) {
+  proximaQuestao(questao) {
+    const jaRespondida = this.answeredQuestions.includes(questao);
+
+    if (jaRespondida) {
+      console.warn(`Questão ${questao} já foi respondida.`);
+      return;
+    }
+
+    // Adiciona à lista de respondidas
     this.answeredQuestions.push(questao);
+
+    // Remove do array de questões disponíveis
+    this.questions = this.questions.filter((q) => q === questao);
   }
 
-  incremetarAcertos() {
+  incrementarAcertos() {
     this.correctSequence++;
   }
 
@@ -30,17 +38,45 @@ export class Partida {
   }
 
   isFinished() {
-    //logica para finalizar a partida
+    if (this.answeredQuestions.length >= this.questions.length) {
+      return {
+        id: this.id,
+        difficulty: this.difficulty,
+        score: this.score,
+      };
+    }
   }
 
+  /**
+   * Cria uma instância de Partida a partir de um registro do banco de dados.
+   * @param {object} item - Registro do banco (ex: DynamoDB)
+   * @returns {Partida}
+   */
+  static fromDatabase(item) {
+    if (!item) throw new Error("Item inválido para criar Partida.");
+
+    const partida = new Partida(item.id, item.difficulty, item.questions || []);
+
+    // Popula campos opcionais se existirem
+    partida.answeredQuestions = item.answeredQuestions || [];
+    partida.correctSequence = item.correctSequence || 0;
+    partida.score = item.score || 0;
+
+    return partida;
+  }
+
+  /**
+   * ✅ Retorna uma versão pública da partida
+   * (ocultando dados internos ou sensíveis)
+   */
   toPublicObject() {
     return {
       id: this.id,
-      answeredQuestions: this.answeredQuestions,
       difficulty: this.difficulty,
       questions: this.questions,
-      score: this.score,
+      answeredQuestions: this.answeredQuestions,
       correctSequence: this.correctSequence,
+      score: this.score,
     };
   }
 }

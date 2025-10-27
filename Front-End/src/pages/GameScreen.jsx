@@ -1,54 +1,58 @@
+import { useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
+import { usePlay } from "../hooks/usePlayContext";
 import QuestionCard from "../components/GameScreen/QuestionCard";
 import HeaderGameScreen from "../components/GameScreen/HeaderGameScreen";
 import PopUp from "../components/GameScreen/Pop-up";
-import { GameMusic } from "../components/Audio/GameAudio/Index.js"; // Música do jogo
+
 import Background0 from "/0.jpg";
 import Background1 from "/1.jpg";
 import Background2 from "/2.jpg";
 import Background3 from "/3.jpg";
-import { usePlay } from "../hooks/usePlayContext.jsx";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useMemo } from "react";
 
 export default function GameScreen() {
-  const randomScreenNumber = useMemo(() => Math.floor(Math.random() * 4), []);
+  const { id_partida } = useParams();
+  const { loadQuestions } = usePlay(); // ✅ Nome semântico (depois da refatoração do contexto)
 
-  const backgroundImages = [Background0, Background1, Background2, Background3];
-  const { searchQuestions } = usePlay();
+  const randomBackground = useMemo(() => {
+    const images = [Background0, Background1, Background2, Background3];
+    return images[Math.floor(Math.random() * images.length)];
+  }, []);
 
-  const { id } = useParams();
-
+  // Carrega as perguntas da partida
   useEffect(() => {
-    const loadQuestions = async () => {
-      await searchQuestions(id);
+    if (!id_partida) return;
+
+    const fetchQuestions = async () => {
+      try {
+        await loadQuestions(id_partida);
+      } catch (error) {
+        console.error("Erro ao carregar perguntas:", error);
+      }
     };
-    loadQuestions();
-  }, [id, searchQuestions]);
+
+    fetchQuestions();
+  }, [id_partida, loadQuestions]);
 
   return (
     <motion.div
       className="flex flex-col items-center py-6 max-md:py-1 h-screen bg-cover bg-center justify-center w-full text-white relative"
+      style={{ backgroundImage: `url(${randomBackground})` }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      style={{
-        backgroundImage: `url(${backgroundImages[randomScreenNumber]})`,
-      }}
       transition={{ duration: 0.5 }}
     >
-      {/* Música do jogo */}
-      <GameMusic />
-
       {/* Overlay escura */}
       <div className="absolute inset-0 h-screen bg-black/50" />
 
       <HeaderGameScreen />
-      <div className="w-full relative h-full p-5 mt-auto flex flex-col items-center justify-between">
+
+      <main className="w-full relative h-full p-5 mt-auto flex flex-col items-center justify-between">
         <QuestionCard />
         <PopUp />
-      </div>
+      </main>
     </motion.div>
   );
 }

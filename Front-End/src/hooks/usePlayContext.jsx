@@ -1,69 +1,123 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAccountContext } from "./useAccountContext";
 import { PlayFetch, questionFetch } from "../api/PlayFetch";
-import { toast } from "react-toastify";
 
 const PlayContext = createContext();
 
+/**
+ * Provider responsável por gerenciar o estado do jogo (partida, pontuação, perguntas, etc.)
+ */
 export function PlayProvider({ children }) {
-  const [difficulty, setDifficulty] = useState(null);
-  const [score, setScore] = useState(0);
-  const [questaoAtual, setQuestaoAtual] = useState(0);
-  const [totalQuestoes, setTotalQuestoes] = useState(0);
-  const [correctSequence, setCorrectSequence] = useState(null);
-  const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
   const { user, token } = useAccountContext();
-  const id = user?.id;
 
-  const setDifficultyPlay = async (difficulty) => {
-    if (!difficulty || !id || !token) return;
+  // 🎯 Estados centrais da partida
+  const [difficulty, setDifficulty] = useState(null);
+  const [score, setScore] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [correctSequence, setCorrectSequence] = useState(null);
+  const [questions, setQuestions] = useState([]);
 
-    setDifficulty(difficulty);
+  const userId = user?.id;
 
-    try {
-      const response = await PlayFetch(difficulty, token, id);
-      toast.success(response.message);
-      navigate(`/play/${response.partida.id}/${difficulty}`);
-    } catch (error) {
-      console.error(error);
-      toast.error("Erro ao iniciar a partida");
-    }
-  };
+  /**
+   * 🔹 Inicia uma nova partida com base na dificuldade selecionada
+   */
+  const startGame = useCallback(
+    async (difficultyLevel) => {
+      if (!difficultyLevel || !userId || !token) {
+        toast.error("Erro ao iniciar a partida. Dados insuficientes.");
+        return;
+      }
 
-  const searchQuestions = async (id_partida) => {
-    try {
-      const response = await questionFetch(id_partida, token);
-      setDifficulty(response.partida.difficulty);
-      setCorrectSequence(response.partida.correctSequence);
-      setQuestions(response.questions);
-      setQuestaoAtual(1);
-      setTotalQuestoes(response.questions.length);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      try {
+        setDifficulty(difficultyLevel);
+
+        const response = await PlayFetch(difficultyLevel, token, userId);
+        toast.success(response.message);
+
+        navigate(`/play/${response.partida.id}/${difficultyLevel}`);
+      } catch (error) {
+        console.error("Erro ao iniciar a partida:", error);
+        toast.error("Não foi possível iniciar a partida.");
+      }
+    },
+    [navigate, token, userId]
+  );
+
+  
+
+  /**
+   * 🔹 Busca as questões da partida atual
+   */
+  const loadQuestions = useCallback(
+    async (matchId) => {
+      try {
+        const response = await questionFetch(matchId, token);
+        const partida = response.partida;
+
+        setDifficulty(partida.difficulty);
+        setCorrectSequence(partida?.correctSequence);
+        setQuestions(partida?.questions);
+        setCurrentQuestion(1);
+        setTotalQuestions(partida.questions.length);
+      } catch (error) {
+        console.error("Erro ao carregar questões:", error);
+        toast.error("Erro ao buscar questões da partida.");
+      }
+    },
+    [token]
+  );
+
+  /**
+   * 🎯 Estado do jogo memorizado para evitar re-renderizações desnecessárias
+   */
+  const contextValue = useMemo(
+    () => ({
+      difficulty,
+      score,
+      currentQuestion,
+      totalQuestions,
+      correctSequence,
+      questions,
+      startGame,
+      loadQuestions,
+      setScore,
+      setCurrentQuestion,
+    }),
+    [
+      difficulty,
+      score,
+      currentQuestion,
+      totalQuestions,
+      correctSequence,
+      questions,
+      startGame,
+      loadQuestions,
+    ]
+  );
 
   return (
-    <PlayContext.Provider
-      value={{
-        difficulty,
-        setDifficultyPlay,
-        score,
-        questaoAtual,
-        totalQuestoes,
-        searchQuestions,
-        questions,
-        correctSequence,
-      }}
-    >
-      {children}
-    </PlayContext.Provider>
+    <PlayContext.Provider value={contextValue}>{children}</PlayContext.Provider>
   );
 }
 
-// Hook para usar mais fácil
+/**
+ * Hook personalizado para consumir o contexto de jogo
+ */
 export function usePlay() {
-  return useContext(PlayContext);
+  const context = useContext(PlayContext);
+  if (!context) {
+    throw new Error("usePlay deve ser usado dentro de um PlayProvider");
+  }
+  return context;
 }
