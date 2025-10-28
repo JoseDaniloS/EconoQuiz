@@ -1,67 +1,54 @@
 import { authToken } from "../middlewares/authMiddleware.js";
 import { Router } from "express";
-import docClient from "../config/database.js";
-import { GetCommand } from "@aws-sdk/lib-dynamodb";
-import { alreadyPlay } from "../validations/playAlready.js";
-import { Question } from "../class/Question.js";
-import { Partida } from "../class/Partida.js";
-import { updatePartida } from "../utils/updatePlay.js";
 
-const TABLE_NAME_QUESTIONS = process.env.DYNAMO_DB_TABLE_QUESTIONS;
+import { existsMatch } from "../utils/matchUtils.js";
+
+import { Partida } from "../class/Partida.js";
+import { updateMatch } from "../utils/matchUtils.js";
+import { getQuestion } from "../utils/getQuestions.js";
 const router = Router();
 
 router.post("/verify-answer", authToken, async (req, res) => {
   try {
-    const { id_question, id_partida, answer } = req.body;
+    const { id_partida, answer } = req.body;
 
     //Validação dos campos obrigatórios
-    if (!id_question || !id_partida || !answer) {
+    if (!id_partida || !answer) {
       return res.status(400).json({
-        message: "Campos obrigatórios: id_question, id_partida e answer.",
+        message: "Campos obrigatórios: id_partida e answer.",
       });
     }
 
-    //Busca partida existente
-    const partidaData = await alreadyPlay(id_partida);
-    const partida = Partida.fromDatabase(partidaData);
+    //Busca match existente
+    const partidaData = await existsMatch(id_partida);
+    const match = Partida.fromDatabase(partidaData);
 
-    if (partida.isFinished()) {
-      const partidaResults = partida.isFinished();
+    const currentQuestion = match.getCurrentQuestion();
+    const finished = await match.isFinished();
+    if (finished) {
       return res
         .status(200)
-        .json({ message: "Partida finalizada!", results: partidaResults });
+        .json({ message: "Partida finalizada!", results: finished });
     }
+    const currectQuestionFromDatabase = await getQuestion(currentQuestion.id, match.difficulty);
+    const isCorrect = currectQuestionFromDatabase.isCorrect(answer);
 
-    //Busca a questão
-    const command = new GetCommand({
-      TableName: TABLE_NAME_QUESTIONS,
-      Key: { id: id_question, difficulty: partida.difficulty },
-    });
-
-    const result = await docClient.send(command);
-    if (!result.Item) {
-      return res.status(404).json({ message: "Questão não encontrada" });
-    }
-
-    const question = Question.fromDatabase(result.Item);
-    const isCorrect = question.isCorrect(answer);
-
-    //Atualiza estado da partida
-    partida.proximaQuestao(id_question);
+    //Atualiza estado da match
+    match.nextQuestion();
     if (isCorrect) {
-      partida.incrementarAcertos();
+      match.incrementarAcertos();
+      match.adicionarPontuacao()
     } else {
-      partida.resetarAcertos();
+      match.resetarAcertos();
     }
     //Atualiza no banco
-    await updatePartida(partida);
+    await updateMatch(match);
 
     //Retorno final
     return res.status(200).json({
       message: isCorrect ? "Acertou!" : "Errou!",
       correct: isCorrect,
-      tip: isCorrect ? null : question.getTip(),
-      partida: partida.toPublicObject(),
+      match: match.toPublicObject(),
     });
   } catch (error) {
     console.error("Erro ao verificar resposta:", error);

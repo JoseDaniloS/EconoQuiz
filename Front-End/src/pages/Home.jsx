@@ -34,7 +34,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">
-      <HomeMusic /> {/* ← Componente de música ADICIONADO aqui */}
       {/* Elementos decorativos de fundo */}
       <div className="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>

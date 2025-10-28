@@ -1,9 +1,9 @@
 export class Difficulty {
   static LEVELS = ["easy", "medium", "hard"]; // níveis permitidos
   static WEIGHTS = {
-    easy: 1,
-    medium: 2,
-    hard: 3,
+    easy: 1.1,
+    medium: 1.2,
+    hard: 1.3,
   };
 
   constructor(level) {

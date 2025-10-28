@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccountContext } from "./useAccountContext";
-import { PlayFetch, questionFetch } from "../api/PlayFetch";
+import { PlayFetch } from "../api/PlayFetch";
 
 const PlayContext = createContext();
 
@@ -44,8 +44,8 @@ export function PlayProvider({ children }) {
 
         const response = await PlayFetch(difficultyLevel, token, userId);
         toast.success(response.message);
-
         navigate(`/play/${response.partida.id}/${difficultyLevel}`);
+        loadQuestions(response.partida);
       } catch (error) {
         console.error("Erro ao iniciar a partida:", error);
         toast.error("Não foi possível iniciar a partida.");
@@ -54,22 +54,18 @@ export function PlayProvider({ children }) {
     [navigate, token, userId]
   );
 
-  
-
   /**
    * 🔹 Busca as questões da partida atual
    */
   const loadQuestions = useCallback(
     async (matchId) => {
       try {
-        const response = await questionFetch(matchId, token);
-        const partida = response.partida;
-
+        
         setDifficulty(partida.difficulty);
         setCorrectSequence(partida?.correctSequence);
         setQuestions(partida?.questions);
         setCurrentQuestion(1);
-        setTotalQuestions(partida.questions.length);
+        setTotalQuestions(partida?.questions.length);
       } catch (error) {
         console.error("Erro ao carregar questões:", error);
         toast.error("Erro ao buscar questões da partida.");

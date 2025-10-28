@@ -16,7 +16,7 @@ export default function MainRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route path="/play" element={<SelectDifficulty />} />
         <Route
-          path="/play/:id_partida/:difficulty/:id_question"
+          path="/play/:id_partida/:difficulty"
           element={<GameScreen />}
         />
       </Route>

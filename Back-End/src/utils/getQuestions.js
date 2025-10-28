@@ -1,4 +1,4 @@
-import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
 import { Question } from "../class/Question.js";
 import docClient from "../config/database.js";
 
@@ -10,14 +10,12 @@ const TABLE_NAME_QUESTIONS = process.env.DYNAMO_DB_TABLE_QUESTIONS;
  * @returns {Promise<Array>} Lista de questões públicas
  */
 export async function getQuestions(difficulty) {
-  if (!difficulty) {
-    throw new Error("Dificuldade obrigatória!");
-  }
+  if (!difficulty) throw new Error("Dificuldade obrigatória!");
 
   try {
     const command = new QueryCommand({
       TableName: TABLE_NAME_QUESTIONS,
-      IndexName: "difficulty-index",
+      IndexName: "difficulty-index", // ✅ só se realmente existir esse GSI criado manualmente
       KeyConditionExpression: "difficulty = :difficulty",
       ExpressionAttributeValues: {
         ":difficulty": difficulty,
@@ -30,21 +28,58 @@ export async function getQuestions(difficulty) {
       return [];
     }
 
-    // Normaliza dados e converte para objetos públicos
     return response.Items.map((item) => {
-      const q = typeof item.id === "object" ? item.id : item; // 🔹 evita aninhamento incorreto
       const question = new Question(
-        q.id,
-        q.statement,
-        q.options,
-        q.correctOption,
-        q.tip,
-        q.difficulty
+        item.id,
+        item.statement,
+        item.options,
+        item.correctOption,
+        item.tip,
+        item.difficulty
       );
       return question.toPublicObject();
     });
   } catch (error) {
     console.error("Erro ao buscar questões:", error);
     throw new Error("Erro ao buscar questões: " + error.message);
+  }
+}
+
+/**
+ * Busca uma única questão pelo ID e dificuldade
+ * @param {string} id - ID da questão
+ */
+export async function getQuestion(id, difficulty) {
+  try {
+    if (!id || !difficulty) {
+      throw new Error("Campos obrigatórios: id e difficulty.");
+    }
+
+    const command = new GetCommand({
+      TableName: TABLE_NAME_QUESTIONS,
+      Key: {
+        id: String(id),
+        difficulty: String(difficulty)
+      },
+    });
+
+    const response = await docClient.send(command);
+
+    if (!response.Item || response.Item.length === 0) {
+      throw new Error("Questão não encontrada.");
+    }
+
+    const item = response.Item;
+    return new Question(
+      item.id,
+      item.statement,
+      item.options,
+      item.correctOption,
+      item.tip,
+      item.difficulty
+    );
+  } catch (error) {
+    console.error("Erro ao buscar questão:", error);
+    throw new Error("Erro ao buscar questão: " + error.message);
   }
 }

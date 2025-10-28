@@ -5,19 +5,22 @@ import { Partida } from "../class/Partida.js";
 import docClient from "../config/database.js";
 import { verificarSeUsuarioExiste } from "../validations/userValidation.js";
 import { Difficulty } from "../class/Difficulty.js";
-import { alreadyPlay } from "../validations/playAlready.js";
+import { existsMatch } from "../utils/matchUtils.js";
 import { getQuestions } from "../utils/getQuestions.js";
 
 const router = Router();
 const TABLE_NAME_PARTIDAS = process.env.DYNAMO_DB_TABLE_PARTIDA;
 
 router.post("/", authToken, async (req, res) => {
-  const { id, difficulty } = req.body;
+  const { id_user, difficulty } = req.body;
 
-  if (!id) {
+  if (!id_user) {
     return res.status(400).json({ message: "ID obrigatorio!" });
   }
-
+  const userExists = await verificarSeUsuarioExiste(id_user);
+  if (!userExists) {
+    return res.status(404).json({ message: "Usuario nao encontrado!" });
+  }
   if (!difficulty) {
     return res.status(400).json({ message: "Dificuldade obrigatoria!" });
   }
@@ -29,14 +32,9 @@ router.post("/", authToken, async (req, res) => {
     return res.status(400).json({ message: err.message });
   }
 
-  const usuarioExistente = await verificarSeUsuarioExiste(id);
-  if (!usuarioExistente) {
-    return res.status(404).json({ message: "Usuario não existe" });
-  }
-
   const questions = await getQuestions(difficulty);
 
-  const partida = new Partida(id, dificuldade.level, questions);
+  const partida = new Partida(id_user, null, dificuldade.level, questions);
 
   const command = new PutCommand({
     TableName: TABLE_NAME_PARTIDAS,
@@ -59,7 +57,7 @@ router.post("/", authToken, async (req, res) => {
 router.get("/:id", authToken, async (req, res) => {
   try {
     const { id } = req.params;
-    const partida = await alreadyPlay(id);
+    const partida = await existsMatch(id);
 
     if (!partida) {
       return res.status(404).json({ message: "Partida não encontrada" });

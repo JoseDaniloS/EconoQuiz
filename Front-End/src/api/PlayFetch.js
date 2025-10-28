@@ -18,23 +18,18 @@ export async function PlayFetch(difficulty, token, id) {
   }
 }
 
-export async function questionFetch(id_partida, token) {
+export async function FetchMatch(matchId, token) {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/questions/${id_partida}`,
+      `${import.meta.env.VITE_API_URL}/play/${matchId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-
-    return response.data; // retorna as questões e informações da partida
+    return response.data;
   } catch (error) {
-    console.error(
-      "Erro ao buscar questões:",
-      error.response?.data?.message || error.message
-    );
-    return null;
+    console.error(error);
   }
 }
