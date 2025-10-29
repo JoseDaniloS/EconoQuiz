@@ -8,7 +8,7 @@ export default function PointsHeaderGameScreen({ SCORE }) {
           <div className="text-right">
             <div className="text-xs uppercase tracking-wide">Pontos</div>
             <div className="text-lg font-extrabold transition-all duration-300 hover:scale-110">
-              {SCORE.toLocaleString()}
+              {SCORE}
             </div>
           </div>
         </div>

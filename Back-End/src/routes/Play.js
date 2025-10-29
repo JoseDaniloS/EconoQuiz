@@ -4,61 +4,78 @@ import { GetCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { Partida } from "../class/Partida.js";
 import docClient from "../config/database.js";
 import { verificarSeUsuarioExiste } from "../validations/userValidation.js";
-import { User } from "../class/User.js";
+import { Difficulty } from "../class/Difficulty.js";
+import { existsMatch } from "../utils/matchUtils.js";
+import { getQuestions } from "../utils/getQuestions.js";
 
 const router = Router();
-
 const TABLE_NAME_PARTIDAS = process.env.DYNAMO_DB_TABLE_PARTIDA;
-router.post("/", authToken, async (req, res) => {
-  const { id } = req.body || {};
 
-  if (!id) {
+router.post("/", authToken, async (req, res) => {
+  const { id_user, difficulty } = req.body;
+
+  if (!id_user) {
     return res.status(400).json({ message: "ID obrigatorio!" });
   }
-  const usuarioExistente = await verificarSeUsuarioExiste(id);
-  if (!usuarioExistente) {
-    return res.status(404).json({ message: "Usuario não existe" });
+  const userExists = await verificarSeUsuarioExiste(id_user);
+  if (!userExists) {
+    return res.status(404).json({ message: "Usuario nao encontrado!" });
   }
-    const objetoUsuario = User.fromDatabase(usuarioExistente);
-    const usuarioPlano = objetoUsuario.toPublicObject()
-  
+  if (!difficulty) {
+    return res.status(400).json({ message: "Dificuldade obrigatoria!" });
+  }
 
-  const partida = new Partida(null, usuarioPlano);
+  let dificuldade;
+  try {
+    dificuldade = new Difficulty(difficulty);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
+  }
+
+  const questions = await getQuestions(difficulty);
+
+  const partida = new Partida(id_user, null, dificuldade.level, questions);
+
   const command = new PutCommand({
     TableName: TABLE_NAME_PARTIDAS,
-    Item: partida,
+    Item: partida.toPublicObject(),
   });
 
-    try {
+  try {
     await docClient.send(command);
-    return res
-      .status(201)
-      .json({ message: "Partida criada com sucesso!", id: partida.id });
+    return res.status(201).json({
+      message: "Partida criada com sucesso!",
+      partida: partida.toPublicObject(),
+    });
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Erro ao criar partida", error: error });
+      .json({ message: "Erro ao criar partida", error: error.message });
+  }
+});
+
+router.delete("/delete/match", authToken, async (req, res) => {
+  const { id_partida } = req.body;
+  try {
+    Partida.deleteMatch(id_partida);
+    return res.status(200).json({ message: "Partida deletada com sucesso!" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 });
 
 router.get("/:id", authToken, async (req, res) => {
-  const { id } = req.params;
-
-  const command = new GetCommand({
-    TableName: TABLE_NAME_PARTIDAS,
-    Key: { id },
-  });
   try {
-    const result = await docClient.send(command);
+    const { id } = req.params;
+    const partida = await existsMatch(id);
 
-    if (!result.Item) {
+    if (!partida) {
       return res.status(404).json({ message: "Partida não encontrada" });
     }
-    return res.json(result.Item);
+
+    return res.status(200).json(partida);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Erro ao buscar partida", error: error });
+    return res.status(500).json({ message: error.message });
   }
 });
 

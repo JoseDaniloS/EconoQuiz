@@ -3,11 +3,11 @@ import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { HomeMusic } from "../components/Audio/HomeAudio/Index.js";  // ← Importação ADICIONADA
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,13 +34,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-bg via-purple-50 to-blue-50 relative overflow-hidden">
-      <HomeMusic />  {/* ← Componente de música ADICIONADO aqui */}
-      
       {/* Elementos decorativos de fundo */}
       <div className="absolute top-20 left-10 w-16 h-16 sm:w-20 sm:h-20 bg-secondary/20 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-24 h-24 sm:w-32 sm:h-32 bg-primary/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
       <div className="absolute top-1/3 right-1/4 w-12 h-12 sm:w-16 sm:h-16 bg-success/20 rounded-full blur-lg animate-pulse delay-500"></div>
-
       {/* Container responsivo */}
       <div className="w-full mx-auto bg-white sm:bg-transparent shadow-2xl sm:shadow-none">
         {/* Header responsivo */}
@@ -88,10 +85,9 @@ export default function HomePage() {
               </div>
 
               {/* Botão principal responsivo */}
-              
               <button
                 className="w-full sm:w-auto group relative bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-primary text-white px-6 py-4 sm:px-12 sm:py-4 rounded-2xl sm:rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl active:scale-95 overflow-hidden shadow-lg"
-                onClick={() => navigate("/play")}
+                onClick={() => navigate("/login")}
               >
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 <div className="relative flex items-center justify-center space-x-3">
@@ -104,7 +100,6 @@ export default function HomePage() {
 
             {/* Cards de recursos responsivos */}
             <div
-              
               className={`space-y-4 sm:grid sm:grid-cols-3 sm:gap-8 sm:space-y-0 mb-8 sm:mb-16 transform transition-all duration-1000 delay-500 ${
                 isAnimated
                   ? "translate-y-0 opacity-100"
@@ -118,7 +113,6 @@ export default function HomePage() {
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Layout mobile: horizontal */}
                   <div className="flex items-center space-x-4 sm:hidden">
                     <div
                       className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-300 ${
@@ -130,7 +124,7 @@ export default function HomePage() {
                       {feature.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-bold text-text mb-1 group-hover:text-primary transition-colors duration-300">
+                      <h3 className="text-sm font-bold text-text mb-1 group-hover:text-primary transition-colors">
                         {feature.title}
                       </h3>
                       <p className="text-xs text-gray-600 leading-relaxed">
@@ -139,7 +133,6 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Layout desktop: vertical */}
                   <div className="hidden sm:block">
                     <div
                       className={`inline-flex items-center justify-center w-14 h-14 rounded-xl mb-6 transition-all duration-300 ${
@@ -150,7 +143,7 @@ export default function HomePage() {
                     >
                       {feature.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-text mb-3 group-hover:text-primary transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-gray-600 leading-relaxed">
@@ -160,7 +153,6 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            
 
             {/* Seção informativa sobre ODS 8 responsiva */}
             <div
@@ -206,7 +198,7 @@ export default function HomePage() {
             </div>
           </div>
         </main>
-        {/* Footer responsivo */}
+
         <Footer />
       </div>
     </div>

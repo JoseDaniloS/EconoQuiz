@@ -6,16 +6,17 @@ import TimerHeaderGameScreen from "./HeaderGameScreen/Timer";
 import ActiveStreakHeaderGameScreen from "./HeaderGameScreen/ActiveStreak";
 
 import useSound from "use-sound";
-import startSoundFile from "/sounds/audio-gamer.mp3"; 
+import startSoundFile from "/sounds/audio-gamer.mp3";
+import { usePlay } from "../../hooks/usePlayContext";
+import { useParams } from "react-router-dom";
 
 export const DURATION_ANSWER = 15;
 
 export default function HeaderGameScreen() {
-  const currentQuestion = 1;
-  const TOTAL_QUESTIONS = 10;
-  const SCORE = 0;
-  const streak = [true, true, true, false];
+  const { score, currentQuestion, totalQuestions, currentStreak } = usePlay();
   const [timeLeft, setTimeLeft] = useState(DURATION_ANSWER);
+  const { verifyAnswer } = usePlay();
+  const { id_partida } = useParams();
 
   const [playStartSound, { stop }] = useSound(startSoundFile, { volume: 0.7 });
 
@@ -24,7 +25,8 @@ export default function HeaderGameScreen() {
       setTimeLeft((prev) => {
         if (prev === 0) {
           clearInterval(timer);
-          stop(); 
+          stop();
+          verifyAnswer("error", id_partida)
           return 0;
         }
         return prev - 1;
@@ -46,15 +48,15 @@ export default function HeaderGameScreen() {
         {/* Progresso da questão */}
         <QuestionProgressHeaderGameScreen
           currentQuestion={currentQuestion}
-          TOTAL_QUESTIONS={TOTAL_QUESTIONS}
+          TOTAL_QUESTIONS={totalQuestions}
         />
         {/* Pontuação */}
-        <PointsHeaderGameScreen SCORE={SCORE} />
+        <PointsHeaderGameScreen SCORE={score} />
       </div>
 
       <div className="flex justify-between mb-2 items-center">
         {/* Sequência de acertos */}
-        <ActiveStreakHeaderGameScreen streak={streak} />
+        <ActiveStreakHeaderGameScreen streak={currentStreak} />
         {/* Timer */}
         <TimerHeaderGameScreen timeLeft={timeLeft} />
       </div>
