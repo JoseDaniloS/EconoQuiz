@@ -4,11 +4,12 @@ import {
   useState,
   useMemo,
   useCallback,
+  useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAccountContext } from "./useAccountContext";
-import { PlayFetch } from "../api/PlayFetch";
+import { PlayFetch, QuitMatchFetch, verifyAnswerFetch } from "../api/PlayFetch";
 
 const PlayContext = createContext();
 
@@ -24,8 +25,12 @@ export function PlayProvider({ children }) {
   const [score, setScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
-  const [correctSequence, setCorrectSequence] = useState(null);
+  const [currentStreak, setCorrectSequence] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [earnedPoints, setEarnedPoints] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [isEndGame, setIsEndGame] = useState(false);
 
   const userId = user?.id;
 
@@ -41,11 +46,10 @@ export function PlayProvider({ children }) {
 
       try {
         setDifficulty(difficultyLevel);
-
         const response = await PlayFetch(difficultyLevel, token, userId);
         toast.success(response.message);
+        setIsEndGame(false);
         navigate(`/play/${response.partida.id}/${difficultyLevel}`);
-        loadQuestions(response.partida);
       } catch (error) {
         console.error("Erro ao iniciar a partida:", error);
         toast.error("Não foi possível iniciar a partida.");
@@ -57,18 +61,63 @@ export function PlayProvider({ children }) {
   /**
    * 🔹 Busca as questões da partida atual
    */
-  const loadQuestions = useCallback(
-    async (matchId) => {
+  const matchData = useCallback(
+    async (match) => {
       try {
-        
-        setDifficulty(partida.difficulty);
-        setCorrectSequence(partida?.correctSequence);
-        setQuestions(partida?.questions);
-        setCurrentQuestion(1);
-        setTotalQuestions(partida?.questions.length);
+        setDifficulty(match.difficulty);
+        setCorrectSequence(match?.currentStreak);
+        setQuestions(match?.questions);
+        setCurrentQuestion(match?.answeredQuestions.length);
+        setTotalQuestions(match?.questions.length);
+        setScore(match?.score);
       } catch (error) {
         console.error("Erro ao carregar questões:", error);
         toast.error("Erro ao buscar questões da partida.");
+      }
+    },
+    [token]
+  );
+
+  useEffect(() => {
+    setIsEndGame(currentQuestion >= totalQuestions);
+  }, [currentQuestion, totalQuestions]);
+
+
+  useEffect(() => {
+    if (isEndGame) {
+      setIsCorrect(null);
+      setEarnedPoints(0);
+    }
+  }, [isEndGame]);
+
+  useEffect(() => {
+    if (isCorrect === true) setCorrectAnswers((prev) => prev + 1);
+  }, [isCorrect]);
+
+  const verifyAnswer = useCallback(
+    async (answer, matchId) => {
+      try {
+        const response = await verifyAnswerFetch(answer, matchId, token);
+        matchData(response.match);
+        setEarnedPoints(response.earnedPoints);
+        setIsCorrect(response.correct);
+      } catch (error) {
+        console.error("Erro ao verificar resposta:", error);
+        toast.error("Erro ao verificar resposta.");
+      }
+    },
+    [token]
+  );
+
+  const quitMatch = useCallback(
+    async (matchId) => {
+      try {
+        await QuitMatchFetch(matchId, token);
+        toast.success("Partida encerrada com sucesso!");
+        navigate("/");
+      } catch (error) {
+        toast.error("Erro ao encerrar a partida.");
+        console.error("Erro ao encerrar a partida:", error);
       }
     },
     [token]
@@ -83,22 +132,34 @@ export function PlayProvider({ children }) {
       score,
       currentQuestion,
       totalQuestions,
-      correctSequence,
+      currentStreak,
       questions,
       startGame,
-      loadQuestions,
+      matchData,
       setScore,
       setCurrentQuestion,
+      verifyAnswer,
+      setIsCorrect,
+      isCorrect,
+      earnedPoints,
+      quitMatch,
+      isEndGame,
+      correctAnswers,
     }),
     [
       difficulty,
       score,
       currentQuestion,
       totalQuestions,
-      correctSequence,
+      currentStreak,
       questions,
       startGame,
-      loadQuestions,
+      matchData,
+      quitMatch,
+      isCorrect,
+      earnedPoints,
+      isEndGame,
+      correctAnswers,
     ]
   );
 

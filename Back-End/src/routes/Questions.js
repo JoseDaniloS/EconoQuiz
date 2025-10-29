@@ -19,9 +19,9 @@ router.post("/verify-answer", authToken, async (req, res) => {
       });
     }
 
-    //Busca match existente
-    const partidaData = await existsMatch(id_partida);
-    const match = Partida.fromDatabase(partidaData);
+    //Busca partida existente
+    const matchData = await existsMatch(id_partida);
+    const match = Partida.fromDatabase(matchData);
 
     const currentQuestion = match.getCurrentQuestion();
     const finished = await match.isFinished();
@@ -30,16 +30,19 @@ router.post("/verify-answer", authToken, async (req, res) => {
         .status(200)
         .json({ message: "Partida finalizada!", results: finished });
     }
-    const currectQuestionFromDatabase = await getQuestion(currentQuestion.id, match.difficulty);
+    const currectQuestionFromDatabase = await getQuestion(
+      currentQuestion.id,
+      match.difficulty
+    );
     const isCorrect = currectQuestionFromDatabase.isCorrect(answer);
-
-    //Atualiza estado da match
+    let earnedPoints = 0;
+    //Atualiza estado da partida
     match.nextQuestion();
     if (isCorrect) {
-      match.incrementarAcertos();
-      match.adicionarPontuacao()
+      match.incrementCorrectStreak();
+      earnedPoints = match.addScore();
     } else {
-      match.resetarAcertos();
+      match.resetStreak();
     }
     //Atualiza no banco
     await updateMatch(match);
@@ -48,6 +51,7 @@ router.post("/verify-answer", authToken, async (req, res) => {
     return res.status(200).json({
       message: isCorrect ? "Acertou!" : "Errou!",
       correct: isCorrect,
+      earnedPoints: earnedPoints,
       match: match.toPublicObject(),
     });
   } catch (error) {

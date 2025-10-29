@@ -1,6 +1,5 @@
 import { uuidv7 } from "uuidv7";
 import { deleteMatch } from "../utils/matchUtils.js";
-import { Question } from "./Question.js";
 import { Difficulty } from "./Difficulty.js";
 
 export class Partida {
@@ -10,7 +9,7 @@ export class Partida {
     difficulty,
     questions,
     answeredQuestions = [],
-    correctSequence = 0,
+    currentStreak = 0,
     score = 0
   ) {
     this.id_user = id_user;
@@ -18,7 +17,7 @@ export class Partida {
     this.difficulty = difficulty;
     this.questions = questions;
     this.answeredQuestions = answeredQuestions;
-    this.correctSequence = correctSequence;
+    this.currentStreak = currentStreak;
     this.score = score;
   }
 
@@ -30,13 +29,17 @@ export class Partida {
       item.difficulty,
       item.questions,
       item.answeredQuestions,
-      item.correctSequence,
+      item.currentStreak,
       item.score
     );
   }
 
-  getCorrectSequence() {
-    return this.correctSequence;
+  getCurrentStreak() {
+    return this.currentStreak;
+  }
+
+  static async deleteMatch() {
+    await deleteMatch(this.id)
   }
 
   getCurrentQuestion() {
@@ -45,10 +48,10 @@ export class Partida {
 
   nextQuestion() {
     const question = this.getCurrentQuestion();
-    const jaRespondida = this.answeredQuestions.some(
+    const alreadyAnswered = this.answeredQuestions.some(
       (q) => q.id === question.id
     );
-    if (jaRespondida) {
+    if (alreadyAnswered) {
       console.warn(`Questão ${question} já foi respondida.`);
       return;
     }
@@ -57,31 +60,26 @@ export class Partida {
     this.answeredQuestions.push(question);
   }
 
-  incrementarAcertos() {
-    this.correctSequence++;
+  incrementCorrectStreak() {
+    this.currentStreak++;
   }
 
-  adicionarPontuacao() {
-    // 🎯 Base aleatória entre 700 e 1000
-    const pontosBase = Math.floor(Math.random() * (1000 - 700 + 1)) + 700;
+  addScore() {
+    const basePoints = Math.floor(Math.random() * (1000 - 700 + 1)) + 700;
 
-    // 💪 Multiplicador por dificuldade
-    const multiplicador = Difficulty.getWeights(this.difficulty);
+    const multiplier = Difficulty.getWeights(this.difficulty);
 
-    // 🔥 Bônus progressivo por sequência (ex: 1.1, 1.2, 1.3)
-    const bonus = 1 + this.correctSequence * 0.1;
+    const bonus = 1 + this.currentStreak * 0.1;
 
-    // 🧮 Calcula pontuação final
-    const pontosGanhos = Math.floor(pontosBase * multiplicador * bonus);
+    const earnedPoints = Math.floor(basePoints * multiplier * bonus);
 
-    // ✅ Adiciona ao total
-    this.score += pontosGanhos;
+    this.score += earnedPoints;
 
-    return pontosGanhos;
+    return earnedPoints;
   }
 
-  resetarAcertos() {
-    this.correctSequence = 0;
+  resetStreak() {
+    this.currentStreak = 0;
   }
 
   async isFinished() {
@@ -108,22 +106,17 @@ export class Partida {
       item.difficulty,
       item.questions,
       item.answeredQuestions,
-      item.correctSequence,
+      item.currentStreak,
       item.score
     );
 
     // Popula campos opcionais se existirem
     partida.answeredQuestions = item.answeredQuestions || [];
-    partida.correctSequence = item.correctSequence || 0;
+    partida.currentStreak = item.currentStreak || 0;
     partida.score = item.score || 0;
 
     return partida;
   }
-
-  /**
-   * ✅ Retorna uma versão pública da partida
-   * (ocultando dados internos ou sensíveis)
-   */
   toPublicObject() {
     return {
       id: this.id,
@@ -131,7 +124,7 @@ export class Partida {
       difficulty: this.difficulty,
       questions: this.questions,
       answeredQuestions: this.answeredQuestions,
-      correctSequence: this.correctSequence,
+      currentStreak: this.currentStreak,
       score: this.score,
     };
   }

@@ -1,39 +1,67 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePlay } from "../hooks/usePlayContext";
 import QuestionCard from "../components/GameScreen/QuestionCard";
 import HeaderGameScreen from "../components/GameScreen/HeaderGameScreen";
-import PopUp from "../components/GameScreen/Pop-up";
+import { FetchMatch } from "../api/PlayFetch";
+import { useAccountContext } from "../hooks/useAccountContext";
+import { ModalAnswer } from "../components/GameScreen/ModalAnswer";
+import confetti from "canvas-confetti";
 
 import Background0 from "/0.jpg";
 import Background1 from "/1.jpg";
 import Background2 from "/2.jpg";
 import Background3 from "/3.jpg";
+import { EndGameScreen } from "./endMatch";
 
 export default function GameScreen() {
   const { id_partida } = useParams();
-  const { loadQuestions } = usePlay(); // ✅ Nome semântico (depois da refatoração do contexto)
+  const {
+    matchData,
+    isCorrect,
+    setIsCorrect,
+    earnedPoints,
+    quitMatch,
+    isEndGame,
+  } = usePlay();
+  const { token } = useAccountContext();
 
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  // Escolhe um background aleatório
   const randomBackground = useMemo(() => {
     const images = [Background0, Background1, Background2, Background3];
     return images[Math.floor(Math.random() * images.length)];
   }, []);
 
-  // Carrega as perguntas da partida
+  // Busca os dados da partida
   useEffect(() => {
-    if (!id_partida) return;
-
-    const fetchQuestions = async () => {
-      try {
-        await loadQuestions(id_partida);
-      } catch (error) {
-        console.error("Erro ao carregar perguntas:", error);
-      }
+    const fetchMatchData = async () => {
+      const response = await FetchMatch(id_partida, token);
+      matchData(response);
     };
+    fetchMatchData();
+  }, []);
 
-    fetchQuestions();
-  }, [id_partida, loadQuestions]);
+  // 🔹 Exibe o modal sempre que isCorrect tiver um valor (true/false)
+  useEffect(() => {
+    if (isCorrect === null) return;
+    if (isCorrect) {
+      confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ["#4ade80", "#22c55e", "#86efac"], // tons de verde
+      });
+    }
+    setShowModal(true);
+  }, [isCorrect]);
+
+  if (isEndGame) {
+    return <EndGameScreen />;
+  }
 
   return (
     <motion.div
@@ -47,12 +75,35 @@ export default function GameScreen() {
       {/* Overlay escura */}
       <div className="absolute inset-0 h-screen bg-black/50" />
 
-      <HeaderGameScreen />
-
-      <main className="w-full relative h-full p-5 mt-auto flex flex-col items-center justify-between">
-        <QuestionCard />
-        <PopUp />
-      </main>
+      {showModal ? (
+        <ModalAnswer
+          isCorrect={isCorrect}
+          points={earnedPoints}
+          onNext={() => {
+            setIsCorrect(null);
+            setShowModal(false);
+          }}
+          onQuit={() => {
+            if (
+              window.confirm(
+                "Você realmente deseja abandonar a partida? Seus avanços não serão salvos."
+              )
+            ) {
+              setIsCorrect(null);
+              setShowModal(false);
+              quitMatch(id_partida);
+              navigate("/");
+            }
+          }}
+        />
+      ) : (
+        <>
+          <HeaderGameScreen />
+          <main className="w-full relative h-full p-5 mt-auto flex flex-col items-center justify-between">
+            <QuestionCard />
+          </main>
+        </>
+      )}
     </motion.div>
   );
 }

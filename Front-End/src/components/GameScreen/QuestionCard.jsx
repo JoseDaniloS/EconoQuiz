@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 import { FaBriefcase, FaChartLine, FaClock, FaLeaf } from "react-icons/fa";
 import AnswerCardGameScreen from "./AnsewerCard";
 import { usePlay } from "../../hooks/usePlayContext";
@@ -37,6 +37,8 @@ function QuestionCard() {
       </div>
     );
   }
+
+
 
   return (
     <>

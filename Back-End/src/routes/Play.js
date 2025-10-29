@@ -54,6 +54,16 @@ router.post("/", authToken, async (req, res) => {
   }
 });
 
+router.delete("/delete/match", authToken, async (req, res) => {
+  const { id_partida } = req.body;
+  try {
+    Partida.deleteMatch(id_partida);
+    return res.status(200).json({ message: "Partida deletada com sucesso!" });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 router.get("/:id", authToken, async (req, res) => {
   try {
     const { id } = req.params;
