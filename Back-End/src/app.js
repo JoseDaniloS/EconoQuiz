@@ -20,6 +20,7 @@ export const SECRET_KEY = process.env.SECRET_KEY;
 
 const app = express();
 
+
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) {
@@ -29,9 +30,13 @@ app.use(cors({
             callback(new Error("Origin not allowed by CORS"));
         }
     },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
 }))
+
+//reponse to preflight requests
+app.options("*", cors());
 
 app.use(express.json());
 
