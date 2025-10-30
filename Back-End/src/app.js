@@ -11,9 +11,10 @@ import cors from "cors";
 dotenv.config();
 
 const allowedOrigins = [
-    "http://localhost:5173",
-    "https://econoquiz.ufersa.dev.br"
-]
+  "http://localhost:5173",
+  "https://econoquiz.ufersa.dev.br",
+  "https://www.econoquiz.ufersa.dev.br",
+];
 
 export const SECRET_KEY = process.env.SECRET_KEY;
 
