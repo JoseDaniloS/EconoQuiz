@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: 'npm'
+          cache-dependency-path: Back-End/package-lock.json
 
       - name: Install dependencies
         working-directory: Back-End
