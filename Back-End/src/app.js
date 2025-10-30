@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
 import authUser from "./routes/AuthUser.js";
 import play from "./routes/Play.js"
