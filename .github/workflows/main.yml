@@ -2,8 +2,8 @@ name: Backend CI/CD
 
 on:
   push:
-    branches: 
-      -main
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -15,12 +15,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Config Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "lts/*"
-          cache: "npm"
+          node-version: 'lts/*'
+          cache: 'npm'
 
       - name: Install dependencies
         working-directory: Back-End
@@ -35,9 +37,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "🚀 Atualizando código no servidor..."
-            cd EconoQuiz/
+            cd EconoQuiz || exit 1
             git pull origin main
-            cd Back-End
+            cd Back-End || exit 1
             npm ci --omit=dev
             docker-compose down -v --remove-orphans
             docker-compose build --no-cache
