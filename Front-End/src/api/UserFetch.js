@@ -7,10 +7,11 @@ export async function RegisterUser(user) {
       import.meta.env.VITE_API_URL + "/auth/registro",
       user
     );
-    return response.data;
+    toast.success(response.data.message);
+    return true;
   } catch (error) {
     if (error.response) {
-      toast.error(error.response.data);
+      toast.error(error.response.data.message);
     }
   }
 }

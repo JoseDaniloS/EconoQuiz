@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../schemas/registerSchema";
 import { RegisterUser } from "../api/UserFetch";
+import { useNavigate } from "react-router-dom";
 
 export function useRegisterForm() {
   const {
@@ -14,9 +15,13 @@ export function useRegisterForm() {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
+
   const handleRegister = async (data) => {
-    await RegisterUser(data);
-  
+    const isRegistered = await RegisterUser(data);
+    if (isRegistered) {
+      navigate("/login");
+    }
   };
 
   return {
