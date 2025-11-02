@@ -1,6 +1,7 @@
 import { uuidv7 } from "uuidv7";
 import { deleteMatch } from "../utils/matchUtils.js";
 import { Difficulty } from "./Difficulty.js";
+import { Ranking } from "./Ranking.js";
 
 export class Partida {
   constructor(
@@ -18,28 +19,15 @@ export class Partida {
     this.questions = questions;
     this.answeredQuestions = answeredQuestions;
     this.currentStreak = currentStreak;
+    this.maxStreak = 0;
     this.score = score;
   }
-
-  static createFromDatabase(item) {
-    if (!item) throw new Error("Item inválido para criar Partida.");
-    return new Partida(
-      item.id_user,
-      item.id,
-      item.difficulty,
-      item.questions,
-      item.answeredQuestions,
-      item.currentStreak,
-      item.score
-    );
-  }
-
   getCurrentStreak() {
     return this.currentStreak;
   }
 
   static async deleteMatch() {
-    await deleteMatch(this.id)
+    await deleteMatch(this.id);
   }
 
   getCurrentQuestion() {
@@ -62,6 +50,7 @@ export class Partida {
 
   incrementCorrectStreak() {
     this.currentStreak++;
+    this.maxStreak++;
   }
 
   addScore() {
@@ -84,9 +73,16 @@ export class Partida {
 
   async isFinished() {
     if (this.answeredQuestions.length < this.questions.length) return false;
-
+    await Ranking.updatetoRanking(
+      this.id_user,
+      this.id,
+      this.score,
+      this.maxStreak,
+      this.difficulty
+    );
     return {
       id: this.id,
+      maxStreak: this.maxStreak,
       difficulty: this.difficulty,
       score: this.score,
     };

@@ -1,15 +1,13 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocument } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { fromIni } from "@aws-sdk/credential-providers";
 import dotenv from "dotenv";
 
-
-
 dotenv.config();
 
- const dynamoClient = new DynamoDBClient({
+const dynamoClient = new DynamoDBClient({
   region: process.env.AWS_REGION,
-   credentials: fromIni({profile: "default"})
+  credentials: fromIni({ profile: "default" }),
   // {
   //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -17,5 +15,12 @@ dotenv.config();
   // },
 });
 
-const docClient = DynamoDBDocument.from(dynamoClient);
+const docClient = DynamoDBDocumentClient.from(dynamoClient, {
+  marshallOptions: {
+    removeUndefinedValues: true,
+  },
+  unmarshallOptions: {
+    wrapNumbers: false,
+  }
+});
 export default docClient;
