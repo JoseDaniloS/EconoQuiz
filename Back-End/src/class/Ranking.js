@@ -2,6 +2,8 @@ import { GetCommand, PutCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import docClient from "../config/database.js";
 import { verificarSeUsuarioExiste } from "../validations/userValidation.js";
 
+import { logMessage } from "../utils/logs.js";
+
 const TABLE_NAME_RANKING = process.env.DYNAMO_DB_TABLE_RANKING;
 export class Ranking {
   constructor(id_user, id_match, bestScore, bestStreak, difficulty) {
@@ -27,16 +29,20 @@ export class Ranking {
                 user: user.username,
               }
             : null;
-        })
+        }).filter(Boolean)
       );
 
-      return rankingArray.filter((entry) => entry !== null);
+      const validRanking = rankingArray.filter(Boolean);
+
+      validRanking.sort((a, b) => b.ranking.bestScore - a.ranking.bestScore);
+
+      return validRanking;
     } catch (error) {
       throw new Error("Erro ao obter lista de Ranking" + error.message);
     }
   }
 
-  static async updatetoRanking(
+  static async updateToRanking(
     id_user,
     id_match,
     bestScore,
@@ -65,7 +71,7 @@ export class Ranking {
         Item: rankingItem.toPublicObject(),
       });
       await docClient.send(updateCommand);
-      console.log("Partida" + id_match + "Adicionada com sucesso!");
+      logMessage("Partida " + id_match + " Adicionada com sucesso!");
     } catch (error) {
       throw new Error("Erro ao adicionar ao ranking: " + error.message);
     }

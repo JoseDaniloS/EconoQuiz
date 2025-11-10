@@ -72,20 +72,36 @@ export class Partida {
   }
 
   async isFinished() {
-    if (this.answeredQuestions.length < this.questions.length) return false;
-    await Ranking.updatetoRanking(
-      this.id_user,
-      this.id,
-      this.score,
-      this.maxStreak,
-      this.difficulty
-    );
-    return {
-      id: this.id,
-      maxStreak: this.maxStreak,
-      difficulty: this.difficulty,
-      score: this.score,
-    };
+    try {
+      //Verifica se ainda há questões pendentes
+      if (this.answeredQuestions.length < this.questions.length) {
+        return false;
+      }
+
+      //Atualiza o ranking
+      await Ranking.updateToRanking(
+        this.id_user,
+        this.id,
+        this.score,
+        this.maxStreak,
+        this.difficulty
+      );
+
+      //Retorna resumo da partida finalizada
+      return {
+        id: this.id,
+        id_user: this.id_user,
+        difficulty: this.difficulty,
+        score: this.score,
+        maxStreak: this.maxStreak,
+        totalAnswered: this.answeredQuestions.length,
+        totalQuestions: this.questions.length,
+        finished: true,
+      };
+    } catch (error) {
+      console.error("Erro ao finalizar partida:", error);
+      throw new Error("Erro ao finalizar partida: " + error.message);
+    }
   }
 
   /**

@@ -64,6 +64,10 @@ export function PlayProvider({ children }) {
   const matchData = useCallback(
     async (match) => {
       try {
+        if (match?.answeredQuestions.length === match?.questions.length) {
+          setIsEndGame(true);
+          return;
+        }
         setDifficulty(match.difficulty);
         setCorrectSequence(match?.currentStreak);
         setQuestions(match?.questions);
@@ -77,11 +81,6 @@ export function PlayProvider({ children }) {
     },
     [token]
   );
-
-  useEffect(() => {
-    setIsEndGame(currentQuestion >= totalQuestions);
-  }, [currentQuestion, totalQuestions]);
-
 
   useEffect(() => {
     if (isEndGame) {
@@ -98,6 +97,11 @@ export function PlayProvider({ children }) {
     async (answer, matchId) => {
       try {
         const response = await verifyAnswerFetch(answer, matchId, token);
+        if (response.isFinally) {
+          setIsEndGame(true);
+          return;
+        }
+
         matchData(response.match);
         setEarnedPoints(response.earnedPoints);
         setIsCorrect(response.correct);

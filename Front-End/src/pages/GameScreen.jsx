@@ -36,7 +36,7 @@ export default function GameScreen() {
     return images[Math.floor(Math.random() * images.length)];
   }, []);
 
-  // Busca os dados da partida
+  // Busca os dados da partida uma primeira vez
   useEffect(() => {
     const fetchMatchData = async () => {
       const response = await FetchMatch(id_partida, token);
