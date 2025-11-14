@@ -31,6 +31,7 @@ export function PlayProvider({ children }) {
   const [earnedPoints, setEarnedPoints] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [isEndGame, setIsEndGame] = useState(false);
+  const [correctAnswer, setCorrectAnswer] = useState("");
 
   const userId = user?.id;
 
@@ -101,7 +102,7 @@ export function PlayProvider({ children }) {
           setIsEndGame(true);
           return;
         }
-
+        setCorrectAnswer(response?.answerCorrect)
         matchData(response.match);
         setEarnedPoints(response.earnedPoints);
         setIsCorrect(response.correct);
@@ -149,8 +150,10 @@ export function PlayProvider({ children }) {
       quitMatch,
       isEndGame,
       correctAnswers,
+      correctAnswer
     }),
     [
+      correctAnswer,
       difficulty,
       score,
       currentQuestion,

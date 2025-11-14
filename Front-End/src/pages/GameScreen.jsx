@@ -24,6 +24,7 @@ export default function GameScreen() {
     earnedPoints,
     quitMatch,
     isEndGame,
+    correctAnswer
   } = usePlay();
   const { token } = useAccountContext();
 
@@ -79,6 +80,7 @@ export default function GameScreen() {
         <ModalAnswer
           isCorrect={isCorrect}
           points={earnedPoints}
+          correctAnswer={correctAnswer}
           onNext={() => {
             setIsCorrect(null);
             setShowModal(false);

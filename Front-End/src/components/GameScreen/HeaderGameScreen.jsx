@@ -10,10 +10,16 @@ import startSoundFile from "/sounds/audio-gamer.mp3";
 import { usePlay } from "../../hooks/usePlayContext";
 import { useParams } from "react-router-dom";
 
-export const DURATION_ANSWER = 15;
-
 export default function HeaderGameScreen() {
-  const { score, currentQuestion, totalQuestions, currentStreak } = usePlay();
+  const { score, currentQuestion, totalQuestions, currentStreak, difficulty } =
+    usePlay();
+
+  const DIFFYCULTY_DURATION = {
+    easy: 15,
+    medium: 25,
+    hard: 30,
+  };
+  const DURATION_ANSWER = DIFFYCULTY_DURATION[difficulty];
   const [timeLeft, setTimeLeft] = useState(DURATION_ANSWER);
   const { verifyAnswer } = usePlay();
   const { id_partida } = useParams();
@@ -26,7 +32,7 @@ export default function HeaderGameScreen() {
         if (prev === 0) {
           clearInterval(timer);
           stop();
-          verifyAnswer("error", id_partida)
+          verifyAnswer("error", id_partida);
           return 0;
         }
         return prev - 1;

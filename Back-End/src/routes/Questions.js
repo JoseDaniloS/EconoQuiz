@@ -61,6 +61,7 @@ router.post("/verify-answer", authToken, async (req, res) => {
     return res.status(200).json({
       message: isCorrect ? "Acertou!" : "Errou!",
       correct: isCorrect,
+      answerCorrect: currectQuestionFromDatabase.getCorrectOption(),
       earnedPoints: earnedPoints,
       match: match.toPublicObject(),
     });

@@ -11,6 +11,7 @@ export function ModalAnswer({
   onNext,
   onQuit,
   setIsVisible,
+  correctAnswer,
 }) {
   const [playCorrect] = useSound(CorrectSound, { volume: 0.5 });
   const [playWrong] = useSound(WrongSound, { volume: 0.5 });
@@ -23,7 +24,7 @@ export function ModalAnswer({
 
     return () => clearTimeout(timeout);
   }, [isCorrect, playCorrect, playWrong]);
-  
+
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-amber-50 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 border-4 border-amber-800 relative overflow-hidden">
@@ -90,9 +91,34 @@ export function ModalAnswer({
         )}
 
         {!isCorrect && (
-          <p className="text-center text-amber-900 mb-6 text-lg font-bold">
-            Você pode conseguir na próxima! 💪
-          </p>
+          <>
+            {/* Mensagem motivacional */}
+            <p className="text-center text-amber-900 mb-6 text-lg font-extrabold tracking-wide">
+              Você pode conseguir na próxima! 💪
+            </p>
+
+            {/* Card estilizado da resposta correta */}
+            <div className="bg-gradient-to-br from-red-200 to-red-300 rounded-xl p-5 mb-6 border-4 border-red-600 shadow-[0_0_20px_rgba(255,0,0,0.3)] relative overflow-hidden">
+              {/* Top label */}
+
+              {/* Ícone decorativo */}
+              <div className="absolute right-2 bottom-8 opacity-20 text-red-800 text-6xl">
+                ❗
+              </div>
+
+              {/* Texto principal */}
+              <p className="text-base font-bold text-red-900 mb-3">
+                A resposta correta era:
+              </p>
+
+              {/* Conteúdo da resposta */}
+              <div className="bg-white rounded-lg p-4 border-2 border-red-700 shadow-inner">
+                <p className="text-red-900 font-mono text-sm leading-relaxed break-words">
+                  {correctAnswer}
+                </p>
+              </div>
+            </div>
+          </>
         )}
 
         {/* Botões */}
