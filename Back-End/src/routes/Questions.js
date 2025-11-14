@@ -6,6 +6,7 @@ import { existsMatch } from "../utils/matchUtils.js";
 import { Partida } from "../class/Partida.js";
 import { updateMatch } from "../utils/matchUtils.js";
 import { getQuestion } from "../utils/getQuestions.js";
+import { logMessage } from "../utils/logs.js";
 const router = Router();
 
 router.post("/verify-answer", authToken, async (req, res) => {
@@ -23,18 +24,27 @@ router.post("/verify-answer", authToken, async (req, res) => {
     const matchData = await existsMatch(id_partida);
     const match = Partida.fromDatabase(matchData);
 
-    const currentQuestion = match.getCurrentQuestion();
     const finished = await match.isFinished();
     if (finished) {
-      return res
-        .status(200)
-        .json({ message: "Partida finalizada!", results: finished });
+      return res.status(200).json({
+        message: "Partida finalizada!",
+        isFinally: true,
+        results: finished,
+      });
     }
+
+    // Log completo para depuração e auditoria
+    const currentQuestion = match.getCurrentQuestion();
+
     const currectQuestionFromDatabase = await getQuestion(
-      currentQuestion.id,
+      currentQuestion?.id,
       match.difficulty
     );
     const isCorrect = currectQuestionFromDatabase.isCorrect(answer);
+
+    logMessage(
+      `🎮 Jogador: ${match.id_user} | Partida: ${match.id} | Questão: ${currentQuestion.id} | Resposta enviada: "${answer}"`
+    );
     let earnedPoints = 0;
     //Atualiza estado da partida
     match.nextQuestion();
@@ -51,6 +61,7 @@ router.post("/verify-answer", authToken, async (req, res) => {
     return res.status(200).json({
       message: isCorrect ? "Acertou!" : "Errou!",
       correct: isCorrect,
+      answerCorrect: currectQuestionFromDatabase.getCorrectOption(),
       earnedPoints: earnedPoints,
       match: match.toPublicObject(),
     });

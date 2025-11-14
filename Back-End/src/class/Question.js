@@ -19,6 +19,10 @@ export class Question {
     );
   }
 
+  getCorrectOption() {
+    return this.correctOption
+  }
+
   /**
    * ✅ Cria uma instância de Question a partir do registro do banco (DynamoDB).
    * @param {object} item - Item retornado do DynamoDB

@@ -1,6 +1,7 @@
 import { uuidv7 } from "uuidv7";
 import { deleteMatch } from "../utils/matchUtils.js";
 import { Difficulty } from "./Difficulty.js";
+import { Ranking } from "./Ranking.js";
 
 export class Partida {
   constructor(
@@ -18,28 +19,15 @@ export class Partida {
     this.questions = questions;
     this.answeredQuestions = answeredQuestions;
     this.currentStreak = currentStreak;
+    this.maxStreak = 0;
     this.score = score;
   }
-
-  static createFromDatabase(item) {
-    if (!item) throw new Error("Item inválido para criar Partida.");
-    return new Partida(
-      item.id_user,
-      item.id,
-      item.difficulty,
-      item.questions,
-      item.answeredQuestions,
-      item.currentStreak,
-      item.score
-    );
-  }
-
   getCurrentStreak() {
     return this.currentStreak;
   }
 
   static async deleteMatch() {
-    await deleteMatch(this.id)
+    await deleteMatch(this.id);
   }
 
   getCurrentQuestion() {
@@ -62,6 +50,7 @@ export class Partida {
 
   incrementCorrectStreak() {
     this.currentStreak++;
+    this.maxStreak++;
   }
 
   addScore() {
@@ -83,13 +72,36 @@ export class Partida {
   }
 
   async isFinished() {
-    if (this.answeredQuestions.length < this.questions.length) return false;
+    try {
+      //Verifica se ainda há questões pendentes
+      if (this.answeredQuestions.length < this.questions.length) {
+        return false;
+      }
 
-    return {
-      id: this.id,
-      difficulty: this.difficulty,
-      score: this.score,
-    };
+      //Atualiza o ranking
+      await Ranking.updateToRanking(
+        this.id_user,
+        this.id,
+        this.score,
+        this.maxStreak,
+        this.difficulty
+      );
+
+      //Retorna resumo da partida finalizada
+      return {
+        id: this.id,
+        id_user: this.id_user,
+        difficulty: this.difficulty,
+        score: this.score,
+        maxStreak: this.maxStreak,
+        totalAnswered: this.answeredQuestions.length,
+        totalQuestions: this.questions.length,
+        finished: true,
+      };
+    } catch (error) {
+      console.error("Erro ao finalizar partida:", error);
+      throw new Error("Erro ao finalizar partida: " + error.message);
+    }
   }
 
   /**

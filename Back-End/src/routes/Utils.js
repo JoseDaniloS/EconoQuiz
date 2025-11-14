@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { authToken } from "../middlewares/authMiddleware.js";
 
-
 const router = Router();
 
 // Middleware `authToken` deve validar o token e, se for válido, chamar `next()`

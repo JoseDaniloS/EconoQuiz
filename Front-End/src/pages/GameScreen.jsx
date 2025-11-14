@@ -24,6 +24,7 @@ export default function GameScreen() {
     earnedPoints,
     quitMatch,
     isEndGame,
+    correctAnswer
   } = usePlay();
   const { token } = useAccountContext();
 
@@ -36,7 +37,7 @@ export default function GameScreen() {
     return images[Math.floor(Math.random() * images.length)];
   }, []);
 
-  // Busca os dados da partida
+  // Busca os dados da partida uma primeira vez
   useEffect(() => {
     const fetchMatchData = async () => {
       const response = await FetchMatch(id_partida, token);
@@ -79,6 +80,7 @@ export default function GameScreen() {
         <ModalAnswer
           isCorrect={isCorrect}
           points={earnedPoints}
+          correctAnswer={correctAnswer}
           onNext={() => {
             setIsCorrect(null);
             setShowModal(false);

@@ -3,6 +3,7 @@ import { FaPlay, FaTrophy, FaUsers, FaBook } from "react-icons/fa";
 import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
+import RankingSection from "../components/GameScreen/RankingSection";
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
@@ -97,6 +98,7 @@ export default function HomePage() {
                 <div className="hidden sm:block absolute inset-0 -top-full bg-gradient-to-b from-transparent via-white/20 to-transparent group-hover:top-full transition-all duration-700 -rotate-12 w-full"></div>
               </button>
             </div>
+            <RankingSection />
 
             {/* Cards de recursos responsivos */}
             <div
