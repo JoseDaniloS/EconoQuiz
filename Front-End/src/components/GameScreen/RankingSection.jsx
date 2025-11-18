@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaTrophy, FaMedal, FaBolt } from "react-icons/fa";
+import { FaTrophy, FaMedal, FaBolt, FaFire } from "react-icons/fa";
 import { getRankingFetch } from "../../api/RankingFetch";
 
 export default function RankingSection({ limit = 10 }) {
@@ -37,17 +37,17 @@ export default function RankingSection({ limit = 10 }) {
       <div className="flex items-center justify-center gap-3 mb-10">
         <FaTrophy className="text-yellow-500 text-4xl drop-shadow-md animate-bounce" />
         <h3 className="text-3xl font-black text-gray-800 tracking-tight">
-          TOP 10 MELHORES JOGADORES
+          RANKING
         </h3>
       </div>
 
       {/* TOP 3 EM DESTAQUE */}
-      <div className="grid grid-cols-3 gap-6 mb-10">
+      <div className="grid grid-cols-3 max-sm:grid-cols-1 gap-6 mb-10">
         {topThree.map((entry, index) => (
           <div
             key={index}
             className={`
-              text-center p-6 rounded-2xl shadow-lg border
+              text-center relative p-6 rounded-2xl shadow-lg border
               transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer
               ${
                 index === 0
@@ -58,67 +58,47 @@ export default function RankingSection({ limit = 10 }) {
               }
             `}
           >
-            <FaMedal className="text-4xl mx-auto mb-3 drop-shadow-md" />
+            <span className="text-3xl font-extrabold opacity-70">
+              #{index + 1}
+            </span>
+            <FaMedal className="text-2xl absolute right-5 top-5 drop-shadow-md" />
             <h4 className="text-lg font-bold">{entry.user}</h4>
 
-            <p className="text-sm mt-2 opacity-90">
-              Sequência Máxima: {entry.ranking.bestStreak}
+            <p className="text-sm  opacity-90 flex items-center justify-center gap-1">
+              Sequência Máxima: {entry.ranking.bestStreak}{" "}
+              <FaFire size={20} color="#ffa500" />
             </p>
 
-            <p className="mt-3 text-2xl font-black drop-shadow">
+            <p className=" text-2xl font-black drop-shadow">
               {entry.ranking.bestScore} pts
             </p>
           </div>
         ))}
       </div>
 
-      {/* TABELA DO RESTANTE */}
-      <div className="overflow-hidden rounded-xl border border-gray-200 shadow-md">
-        <table className="w-full text-sm md:text-base">
-          <thead>
-            <tr className="bg-primary text-white">
-              <th className="py-3 px-4 text-left">Posição</th>
-              <th className="py-3 px-4 text-left">Jogador</th>
-              <th className="py-3 px-4 text-left">Melhor Sequência</th>
-              <th className="py-3 px-4 text-right">Pontos</th>
-            </tr>
-          </thead>
+      {/* RESTANTE */}
+      <div className="grid grid-cols-4 max-md:grid-cols-1 gap-6">
+        {others.map((other, index) => (
+          <div
+            key={index}
+            className="flex flex-col relative p-3 bg-gradient-to-br rounded-2xl from-gray-500 to-gray-700 text-white border-gray-700"
+          >
+            <span className="absolute text-xl right-2 top-2 font-extrabold opacity-40">
+              #{index + 4}
+            </span>
+            <h4 className="">{other.user}</h4>
 
-          <tbody className="bg-white">
-            {others.length > 0 ? (
-              others.map((entry, index) => (
-                <tr
-                  key={index}
-                  className="border-b hover:bg-gray-50 transition-all duration-200"
-                >
-                  <td className="py-3 px-4 font-semibold text-gray-700">
-                    #{index + 4}
-                  </td>
-
-                  <td className="py-3 px-4">{entry.user}</td>
-
-                  <td className="py-3 px-4 flex items-center gap-2">
-                    <FaBolt className="text-orange-500" />
-                    {entry.ranking.bestStreak}
-                  </td>
-
-                  <td className="py-3 px-4 text-right font-bold text-primary">
-                    {entry.ranking.bestScore}
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td
-                  colSpan="4"
-                  className="py-4 text-center text-gray-500 italic"
-                >
-                  Nenhum outro jogador encontrado 😢
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            <div>
+              <p className="text-sm flex gap-1 opacity-90">
+                Sequência Máxima: {other.ranking.bestStreak}{" "}
+                <FaFire size={20} color="#ffa500" />
+              </p>
+              <p className="text-xl font-black drop-shadow">
+                {other.ranking.bestScore} pts
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
