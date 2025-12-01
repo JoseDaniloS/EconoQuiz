@@ -1,0 +1,122 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{abstract}
+\usepackage{times}
+\usepackage{setspace}
+\usepackage[a4paper, top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
+\usepackage{titlesec}
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{\thesection}
+{0.5em}
+{\uppercase}
+\titlespacing*{\section}{0pt}{1.5cm}{0.5cm}
+
+\setlength{\absleftindent}{0cm}
+\setlength{\absrightindent}{0cm}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+\vspace*{3cm}
+
+\Large\textbf{\uppercase{EconoQuiz: Uma Plataforma Gamificada para a Promoção da Literacia Financeira e o Suporte à ODS 8 (Trabalho Decente e Crescimento Econômico)}}
+\par
+\vspace{2cm}
+
+\normalsize
+\begin{spacing}{1.0}
+\begin{tabular}{c}
+Abnoan Gabriel$^{1}$\\
+Jéssica Isabela$^{2}$\\
+José Danilo$^{3}$
+\end{tabular}
+\end{spacing}
+\end{center}
+
+\begin{spacing}{1.0}
+\footnotetext[1]{
+\scriptsize UFERSA - UNIVERSIDADE FEDERAL DO SEMI-ÁRIDO.
+}
+\end{spacing}
+
+\newpage
+\thispagestyle{plain}
+
+\begin{center}
+\normalfont\normalsize\textbf{RESUMO}
+\end{center}
+
+\begin{spacing}{1.0}
+\noindent Este artigo apresenta o desenvolvimento e a arquitetura do \textbf{EconoQuiz}, uma aplicação de quiz gamificada projetada para aumentar a literacia financeira de forma acessível e envolvente. O projeto se alinha à Meta 8.10 do \textbf{Objetivo de Desenvolvimento Sustentável (ODS) 8} — Trabalho Decente e Crescimento Econômico — buscando fortalecer a inclusão financeira e o acesso a serviços econômicos básicos. O desempenho dos usuários é avaliado de maneira dinâmica, utilizando um sistema de pontuação que reflete o \textbf{nível de proficiência} em tópicos financeiros essenciais, com foco em jovens e adultos. Detalham-se os requisitos funcionais e não funcionais que garantem uma experiência de aprendizado robusta, com partidas baseadas em níveis de dificuldade e pontuações atualizadas em tempo real em um ranking competitivo. A arquitetura da plataforma segue o padrão \textbf{Model-View-Controller (MVC)}, implementado com \textbf{React Native} no front-end e \textbf{Node.js/Express} no back-end. O \textbf{EconoQuiz} é proposto como uma solução tecnológica escalável para o fortalecimento da educação financeira e o desenvolvimento sustentável.
+\end{spacing}
+
+\vspace{1cm}
+\begin{spacing}{1.0}
+\noindent \textbf{Palavras-chave:} Literacia Financeira; Gamificação; ODS 8; Desenvolvimento Sustentável; Tecnologia Educacional.
+\end{spacing}
+
+\newpage
+\begin{spacing}{1.5}
+
+
+\section{Introdução}
+
+A literacia financeira é um pilar essencial para a autonomia e o empoderamento econômico na sociedade contemporânea. A ausência de habilidades em orçamento, gestão de dívidas e planejamento de investimentos impacta o bem-estar individual e limita as oportunidades de crescimento, obstaculizando o desenvolvimento social. Em resposta a essa lacuna educacional, o presente trabalho descreve a concepção e a arquitetura do \textbf{EconoQuiz}, uma aplicação móvel e web desenhada para transformar a educação financeira em uma experiência envolvente e acessível.
+
+O \textbf{EconoQuiz} surge como uma ferramenta de apoio à inclusão financeira, alinhando-se diretamente à \textbf{Meta 8.10 do Objetivo de Desenvolvimento Sustentável (ODS) 8} da ONU, que foca na promoção do trabalho decente e do crescimento econômico. Por meio da capacitação em habilidades financeiras, o projeto visa aprimorar a capacidade de jovens e adultos para uma participação plena e informada no mercado.
+
+O sistema opera com base em um mecanismo de quiz gamificado. As partidas variam em dificuldade e atribuem pontuações que definem o \textbf{nível de proficiência} e a posição do usuário em um \textbf{ranking global}. O design é suportado por um conjunto rigoroso de requisitos funcionais e não funcionais para garantir escalabilidade e alto desempenho. Este artigo detalhará a fundamentação teórica que justifica a metodologia de gamificação e apresentará o design técnico da solução como um agente de mudança social e econômica.
+
+
+\section{Desenvolvimento}
+
+\subsection{Fundamentação Teórica}
+
+O design do EconoQuiz baseia-se na interseção entre dois eixos principais: a \textbf{literacia financeira} como meio de inclusão social e o uso da \textbf{gamificação} como estratégia pedagógica para promover o engajamento e a retenção de conhecimento.
+
+\subsubsection{Literacia Financeira como Fator de Inclusão}
+
+A literacia financeira é definida pela OCDE como a capacidade de compreender conceitos e riscos financeiros e de aplicar esse conhecimento para tomar decisões eficazes em diferentes contextos econômicos. No Brasil, segundo estudos recentes do Banco Central, o nível de literacia financeira permanece abaixo da média global, especialmente entre jovens adultos.
+
+O \textbf{EconoQuiz} busca responder a essa demanda por meio da disseminação de conceitos básicos de economia, orçamento pessoal e consumo consciente. O jogo utiliza uma abordagem progressiva, em que as perguntas são classificadas em três níveis de dificuldade — fácil, médio e difícil — representando a evolução cognitiva do usuário. Dessa forma, o aplicativo não apenas transmite conhecimento, mas também mensura o progresso e estimula o aprendizado contínuo.
+
+Ao alinhar-se à \textbf{ODS 8}, o projeto contribui para o fortalecimento da capacidade financeira individual, elemento indispensável para a promoção do trabalho decente e o crescimento econômico sustentável. A inclusão financeira é, portanto, não apenas uma meta social, mas também um instrumento de equidade e desenvolvimento.
+
+\subsubsection{A Gamificação como Estratégia de Aprendizagem}
+
+A gamificação consiste na utilização de elementos de jogos — como desafios, recompensas, níveis e rankings — em contextos não relacionados a jogos, visando aumentar a motivação e o engajamento dos usuários. Pesquisas recentes em educação digital apontam que o aprendizado mediado por gamificação pode elevar em até 60\% a retenção de conteúdo, além de promover o pensamento crítico e a resolução de problemas.
+
+No contexto do \textbf{EconoQuiz}, a gamificação é aplicada através de:
+\begin{itemize}
+\item \textbf{Sistema de Pontuação:} baseado na dificuldade da questão e na precisão das respostas, refletindo a progressão de conhecimento.
+\item \textbf{Ranking Global:} incentivo à competição saudável e à socialização entre usuários.
+\item \textbf{Feedback Imediato:} reforço positivo que orienta o aprendizado e estimula a correção de erros.
+\item \textbf{Dicas Contextuais:} auxiliam na compreensão de temas complexos, reforçando o caráter educativo do jogo.
+\end{itemize}
+
+Essa estrutura permite que o EconoQuiz vá além do entretenimento, posicionando-se como uma ferramenta pedagógica eficaz que alia teoria econômica e prática interativa.
+
+\section*{Conclusão}
+
+O projeto EconoQuiz apresenta uma solução tecnológica robusta e pedagogicamente fundamentada para o desafio da baixa literacia financeira. Ao integrar a gamificação a uma arquitetura de software moderna e escalável, o sistema cumpre a proposta de transformar a educação financeira em uma jornada motivadora e acessível.
+
+O trabalho demonstrou que as escolhas metodológicas e tecnológicas estão intrinsecamente ligadas ao objetivo de promover a inclusão financeira e de apoiar a Meta 8.10 do ODS 8. A estrutura MVC e a utilização de React Native e Node.js garantem que a plataforma possa ser distribuída em larga escala com alta performance, alcançando um público amplo.
+
+Por fim, reconhece-se que a principal limitação deste projeto é a ausência de dados empíricos pós-implementação. Pesquisas futuras devem focar na validação pedagógica do EconoQuiz por meio de testes de usabilidade e avaliação do impacto real na tomada de decisão financeira dos usuários.
+
+
+
+\end{spacing}
+\end{document}
