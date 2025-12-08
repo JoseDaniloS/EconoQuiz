@@ -10,7 +10,7 @@ const TABLE_NAME_PARTIDAS = process.env.DYNAMO_DB_TABLE_PARTIDA;
  * @returns {Promise<object>} - Retorna os dados atualizados da partida.
  */
 export async function updateMatch(match) {
-  if (!match|| !match.id) {
+  if (!match || !match.id) {
     throw new Error("Partida inválida ou sem ID");
   }
 
@@ -21,6 +21,7 @@ export async function updateMatch(match) {
     const command = new PutCommand({
       TableName: TABLE_NAME_PARTIDAS,
       Item: matchToSave,
+      ConditionExpression: "attribute_exists(id)",
     });
 
     await docClient.send(command);
@@ -66,7 +67,7 @@ export async function existsMatch(id) {
       throw new Error("Partida não encontrada.");
     }
 
-    return result.Item; // retorna os dados da partida
+    return result.Item ?? null; // retorna os dados da partida
   } catch (error) {
     console.error("Erro ao buscar partida:", error);
     throw new Error("Erro ao buscar partida: " + error.message);

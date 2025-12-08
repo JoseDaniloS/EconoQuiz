@@ -1,24 +1,49 @@
-# Logs
-logs
-*.log
+# =============================
+# Node.js
+# =============================
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
+yarn.lock
+pnpm-lock.yaml
 
-node_modules
-dist
-dist-ssr
-*.local
+# =============================
+# Ambiente
+# =============================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# =============================
+# Logs
+# =============================
+logs
+*.log
+logs/*
+*.out
+*.err
+
+# =============================
+# Sistema Operacional
+# =============================
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# =============================
+# Testes e Coverage
+# =============================
+coverage/
+.nyc_output/
+jest-html-reporters-*.html
+
+# =============================
+# Build/Cache
+# =============================
+dist/
+build/
+.cache/
+.tmp/

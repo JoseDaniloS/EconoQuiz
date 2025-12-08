@@ -11,7 +11,7 @@ const hard = JSON.parse(fs.readFileSync("./quiz_ods8_hard.json", "utf-8"));
 
 const questions = [...easy, ...medium, ...hard]; // ✅ união correta dos arrays
 
-async function sendAllQuestions() {
+export async function sendAllQuestions() {
   console.log(
     `📘 Inserindo ${questions.length} questões na tabela ${TABLE_NAME_QUESTIONS}...`
   );
@@ -34,6 +34,3 @@ async function sendAllQuestions() {
 
   console.log("🎉 Todas as questões foram inseridas com sucesso!");
 }
-
-// Executa o script
-sendAllQuestions();
