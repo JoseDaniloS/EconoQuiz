@@ -24,12 +24,10 @@ router.post("/verify-answer", authToken, async (req, res) => {
     const matchData = await existsMatch(id_partida);
     const match = Partida.fromDatabase(matchData);
 
-    const finished = await match.isFinished();
-    if (finished) {
-      return res.status(200).json({
-        message: "Partida finalizada!",
+    if (match.answeredQuestions.length >= match.questions.length) {
+      return res.status(400).json({
+        message: "Esta partida já foi finalizada.",
         isFinally: true,
-        results: finished,
       });
     }
 
@@ -45,7 +43,9 @@ router.post("/verify-answer", authToken, async (req, res) => {
     logMessage(
       `🎮 Jogador: ${match.id_user} | Partida: ${match.id} | Questão: ${currentQuestion.id} | Resposta enviada: "${answer}"`
     );
+
     let earnedPoints = 0;
+
     //Atualiza estado da partida
     match.nextQuestion();
     if (isCorrect) {
@@ -56,6 +56,18 @@ router.post("/verify-answer", authToken, async (req, res) => {
     }
     //Atualiza no banco
     await updateMatch(match);
+
+    const finished = await match.isFinished();
+    if (finished) {
+      return res.status(200).json({
+        message: "Partida finalizada!",
+        isFinally: true,
+        correct: isCorrect,
+        answerCorrect: currectQuestionFromDatabase.getCorrectOption(),
+        earnedPoints: earnedPoints,
+        results: finished,
+      });
+    }
 
     //Retorno final
     return res.status(200).json({
