@@ -4,8 +4,9 @@ import authUser from "./routes/AuthUser.js";
 import play from "./routes/Play.js";
 import utils from "./routes/Utils.js";
 import questions from "./routes/Questions.js";
-import ranking from "./routes/Ranking.js"
-import cors from "cors"
+import ranking from "./routes/Ranking.js";
+import { sendAllQuestions } from "./Send.js";
+//import cors from "cors"
 
 dotenv.config();
 
@@ -14,11 +15,12 @@ export const SECRET_KEY = process.env.SECRET_KEY;
 const app = express();
 
 app.use(express.json());
+//app.use(cors());
 
 app.use("/auth", authUser);
 app.use("/play", play);
 app.use("/questions", questions);
 app.use("/api", utils);
-app.use("/ranking", ranking)
+app.use("/ranking", ranking);
 
 export default app;

@@ -21,6 +21,7 @@ export class Partida {
     this.currentStreak = currentStreak;
     this.maxStreak = 0;
     this.score = score;
+    this.createdAt = new Date().toLocaleString("pt-BR");
   }
   getCurrentStreak() {
     return this.currentStreak;
@@ -49,8 +50,10 @@ export class Partida {
   }
 
   incrementCorrectStreak() {
-    this.currentStreak++;
-    this.maxStreak++;
+    this.currentStreak++; 
+
+    // Atualiza maxStreak apenas se currentStreak for maior
+    this.maxStreak = Math.max(this.maxStreak, this.currentStreak);
   }
 
   addScore() {
@@ -119,13 +122,15 @@ export class Partida {
       item.questions,
       item.answeredQuestions,
       item.currentStreak,
-      item.score
+      item.score,
     );
 
     // Popula campos opcionais se existirem
     partida.answeredQuestions = item.answeredQuestions || [];
     partida.currentStreak = item.currentStreak || 0;
+    partida.maxStreak = item.maxStreak || 0;
     partida.score = item.score || 0;
+    partida.createdAt = item?.createdAt
 
     return partida;
   }
@@ -138,6 +143,7 @@ export class Partida {
       answeredQuestions: this.answeredQuestions,
       currentStreak: this.currentStreak,
       score: this.score,
+      maxStreak: this.maxStreak
     };
   }
 }

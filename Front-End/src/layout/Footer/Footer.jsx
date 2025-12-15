@@ -20,7 +20,7 @@ const team = [
 
 export default function Footer() {
   return (
-    <footer className="text-center py-6 sm:py-8 text-gray-500 text-xs sm:text-sm px-4 bg-gray-50">
+    <footer className="text-center py-6 sm:py-8 text-white text-xs sm:text-sm px-4 bg-primary">
       {/* Mensagem sobre ODS */}
       <div className="flex justify-between max-md:flex-col max-w-4xl mx-auto">
         <p className="mb-2">
@@ -34,7 +34,7 @@ export default function Footer() {
         </p>
         {/* Equipe */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-2">
-          <span className="font-semibold text-gray-700">Desenvolvido por:</span>
+          <span className="font-semibold text-white">Desenvolvido por:</span>
           <div className="flex gap-4 flex-col">
             {team.map((member, index) => (
               <div
@@ -67,7 +67,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright opcional */}
-      <p className="mt-2 text-gray-400 text-xs">
+      <p className="mt-2 text-white text-xs">
         &copy; {new Date().getFullYear()} ODS 8 Quiz - Projeto de Teste de
         Software 2025.2 - UFERSA
       </p>

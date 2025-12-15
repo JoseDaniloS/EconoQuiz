@@ -10,6 +10,20 @@ yarn.lock
 pnpm-lock.yaml
 
 # =============================
+# Arquivos Docker
+# =============================
+docker-compose.yml
+# NÃO ignore o Dockerfile
+# Dockerfile
+
+# =============================
+# Nginx
+# =============================
+# Não ignore nginx.conf
+# nginx.conf é essencial no deploy
+
+
+# =============================
 # Ambiente
 # =============================
 .env

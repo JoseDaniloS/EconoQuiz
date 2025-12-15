@@ -4,6 +4,7 @@ import Footer from "../layout/Footer/Footer";
 import { Header } from "../layout/Header/Header";
 import { useNavigate } from "react-router-dom";
 import RankingSection from "../components/GameScreen/RankingSection";
+import ODS_8 from "/ODS_8.webp";
 
 export default function HomePage() {
   const [isAnimated, setIsAnimated] = useState(false);
@@ -167,6 +168,10 @@ export default function HomePage() {
               <h3 className="text-lg sm:text-2xl font-bold text-text mb-3 sm:mb-4">
                 Sobre o ODS 8
               </h3>
+
+              <div className="flex w-full justify-center">
+                <img src={ODS_8} alt="" className="w-32 mb-3 rounded-2xl shadow-md" />
+              </div>
               <p className="text-xs sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6 sm:max-w-3xl sm:mx-auto">
                 <span className="sm:hidden">
                   Promove crescimento econômico sustentável, emprego pleno e

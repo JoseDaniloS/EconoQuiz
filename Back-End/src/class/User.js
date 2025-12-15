@@ -14,7 +14,7 @@ export class User {
     this.username = username;
     this.email = email;
     this.password = isHashed ? password : bcrypt.hashSync(password, 8);
-    this.createdAt = createdAt || new Date().toISOString();
+    this.createdAt = createdAt || new Date().toLocaleString("pt-BR");
   }
 
   getID() {

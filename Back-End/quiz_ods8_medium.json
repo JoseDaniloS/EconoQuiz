@@ -1,0 +1,252 @@
+[
+  {
+    "id": "q21",
+    "difficulty": "medium",
+    "statement": "Qual é o principal objetivo do ODS 8?",
+    "options": [
+      "Reduzir as desigualdades de gênero",
+      "Assegurar saúde e bem-estar",
+      "Promover educação de qualidade para todos",
+      "Promover crescimento econômico sustentado e trabalho decente"
+    ],
+    "correctOption": "Promover crescimento econômico sustentado e trabalho decente",
+    "tip": "O ODS 8 trata de emprego, produtividade e condições dignas de trabalho."
+  },
+  {
+    "id": "q22",
+    "difficulty": "medium",
+    "statement": "O que o termo 'trabalho decente' representa no contexto do ODS 8?",
+    "options": [
+      "Trabalho voluntário e sem remuneração",
+      "Trabalho informal com liberdade total de horários",
+      "Trabalho que garante renda justa, segurança e igualdade de oportunidades",
+      "Trabalho em tempo parcial com benefícios reduzidos"
+    ],
+    "correctOption": "Trabalho que garante renda justa, segurança e igualdade de oportunidades",
+    "tip": "Trabalho decente está relacionado a condições dignas e oportunidades iguais."
+  },
+  {
+    "id": "q23",
+    "difficulty": "medium",
+    "statement": "Qual indicador é usado para medir o progresso do ODS 8?",
+    "options": [
+      "Expectativa de vida",
+      "Taxa de alfabetização",
+      "Número de universidades",
+      "Taxa de emprego e desemprego juvenil"
+    ],
+    "correctOption": "Taxa de emprego e desemprego juvenil",
+    "tip": "ODS 8 monitora emprego, produtividade e condições de trabalho."
+  },
+  {
+    "id": "q24",
+    "difficulty": "medium",
+    "statement": "Qual setor é mais impactado pelo ODS 8?",
+    "options": [
+      "Agricultura familiar",
+      "Indústria e serviços",
+      "Saúde pública",
+      "Educação básica"
+    ],
+    "correctOption": "Indústria e serviços",
+    "tip": "O crescimento econômico sustentável depende de produtividade nos setores produtivos."
+  },
+  {
+    "id": "q25",
+    "difficulty": "medium",
+    "statement": "O ODS 8 busca promover crescimento econômico que seja:",
+    "options": [
+      "Baseado em exportações",
+      "Sustentado, inclusivo e sustentável",
+      "Rápido e concentrado",
+      "Exclusivamente industrial"
+    ],
+    "correctOption": "Sustentado, inclusivo e sustentável",
+    "tip": "O foco é o equilíbrio entre crescimento e inclusão social."
+  },
+  {
+    "id": "q26",
+    "difficulty": "medium",
+    "statement": "O que significa produtividade do trabalho?",
+    "options": [
+      "Quantidade de trabalhadores em uma empresa",
+      "Taxa de emprego formal",
+      "Nível de produção por hora de trabalho",
+      "Valor total de exportações"
+    ],
+    "correctOption": "Nível de produção por hora de trabalho",
+    "tip": "A produtividade está ligada à eficiência do trabalho."
+  },
+  {
+    "id": "q27",
+    "difficulty": "medium",
+    "statement": "Qual desses grupos é especialmente considerado no ODS 8?",
+    "options": [
+      "Funcionários públicos",
+      "Jovens e mulheres",
+      "Empresários de grande porte",
+      "Idosos aposentados"
+    ],
+    "correctOption": "Jovens e mulheres",
+    "tip": "O ODS 8 visa reduzir o desemprego juvenil e promover igualdade de gênero."
+  },
+  {
+    "id": "q28",
+    "difficulty": "medium",
+    "statement": "Qual destes é um desafio para alcançar o ODS 8?",
+    "options": [
+      "Alta expectativa de vida",
+      "Desemprego e informalidade no mercado de trabalho",
+      "Crescimento urbano acelerado",
+      "Baixo investimento em pesquisa científica"
+    ],
+    "correctOption": "Desemprego e informalidade no mercado de trabalho",
+    "tip": "O trabalho informal impede o acesso a direitos trabalhistas."
+  },
+  {
+    "id": "q29",
+    "difficulty": "medium",
+    "statement": "O turismo sustentável é mencionado no ODS 8 por qual razão?",
+    "options": [
+      "Por aumentar o fluxo de capital estrangeiro",
+      "Por reduzir a produtividade industrial",
+      "Por gerar empregos e promover a cultura local",
+      "Por aumentar o consumo de energia"
+    ],
+    "correctOption": "Por gerar empregos e promover a cultura local",
+    "tip": "O turismo sustentável é uma forma de crescimento inclusivo."
+  },
+  {
+    "id": "q30",
+    "difficulty": "medium",
+    "statement": "O crescimento econômico deve estar alinhado com:",
+    "options": [
+      "O aumento do consumo de energia",
+      "A expansão militar",
+      "A sustentabilidade e inclusão social",
+      "A degradação ambiental"
+    ],
+    "correctOption": "A sustentabilidade e inclusão social",
+    "tip": "O ODS 8 busca crescimento sem comprometer o meio ambiente."
+  },
+  {
+    "id": "q31",
+    "difficulty": "medium",
+    "statement": "O que representa a sigla OIT, citada em indicadores do ODS 8?",
+    "options": [
+      "Ordem Institucional de Trabalho",
+      "Organização Internacional do Turismo",
+      "Operação Integrada de Transporte",
+      "Organização Internacional do Trabalho"
+    ],
+    "correctOption": "Organização Internacional do Trabalho",
+    "tip": "A OIT promove direitos e padrões internacionais de trabalho."
+  },
+  {
+    "id": "q32",
+    "difficulty": "medium",
+    "statement": "O que é considerado trabalho forçado segundo a OIT?",
+    "options": [
+      "Trabalho em jornada reduzida",
+      "Trabalho voluntário em ONGs",
+      "Trabalho imposto sob ameaça ou coação",
+      "Trabalho com salário mínimo garantido"
+    ],
+    "correctOption": "Trabalho imposto sob ameaça ou coação",
+    "tip": "O ODS 8 combate o trabalho forçado e infantil."
+  },
+  {
+    "id": "q33",
+    "difficulty": "medium",
+    "statement": "Um dos focos do ODS 8 é apoiar pequenas e médias empresas porque:",
+    "options": [
+      "Dependem exclusivamente do setor público",
+      "Geram poucos empregos",
+      "Contribuem para inovação e geração de renda local",
+      "São menos produtivas"
+    ],
+    "correctOption": "Contribuem para inovação e geração de renda local",
+    "tip": "PMEs fortalecem economias locais e sustentáveis."
+  },
+  {
+    "id": "q34",
+    "difficulty": "medium",
+    "statement": "A redução do trabalho infantil é um objetivo direto de qual ODS?",
+    "options": ["ODS 11", "ODS 8", "ODS 3", "ODS 5"],
+    "correctOption": "ODS 8",
+    "tip": "Trabalho decente implica eliminar práticas abusivas."
+  },
+  {
+    "id": "q35",
+    "difficulty": "medium",
+    "statement": "O crescimento econômico sustentável deve respeitar:",
+    "options": [
+      "A maximização do lucro imediato",
+      "A expansão ilimitada da produção",
+      "A exploração de recursos naturais sem controle",
+      "Os limites ambientais e sociais"
+    ],
+    "correctOption": "Os limites ambientais e sociais",
+    "tip": "Sustentabilidade é parte essencial do ODS 8."
+  },
+  {
+    "id": "q36",
+    "difficulty": "medium",
+    "statement": "Qual desses setores gera mais empregos formais globalmente?",
+    "options": [
+      "Construção civil",
+      "Indústria pesada",
+      "Serviços",
+      "Agricultura"
+    ],
+    "correctOption": "Serviços",
+    "tip": "O setor de serviços é o maior empregador no mundo."
+  },
+  {
+    "id": "q37",
+    "difficulty": "medium",
+    "statement": "O ODS 8 incentiva políticas que aumentem a:",
+    "options": [
+      "Exportação de matérias-primas",
+      "Concentração de renda",
+      "Produtividade e inovação",
+      "Desigualdade e competição"
+    ],
+    "correctOption": "Produtividade e inovação",
+    "tip": "A inovação é essencial para o crescimento econômico sustentável."
+  },
+  {
+    "id": "q38",
+    "difficulty": "medium",
+    "statement": "O desemprego juvenil é um desafio porque:",
+    "options": [
+      "Aumenta o PIB per capita",
+      "Diminui a desigualdade social",
+      "Reduz o potencial de crescimento econômico",
+      "Melhora a competitividade do mercado"
+    ],
+    "correctOption": "Reduz o potencial de crescimento econômico",
+    "tip": "A falta de emprego entre jovens afeta o desenvolvimento econômico."
+  },
+  {
+    "id": "q39",
+    "difficulty": "medium",
+    "statement": "A promoção de condições seguras no trabalho está ligada a:",
+    "options": ["ODS 13", "ODS 8", "ODS 1", "ODS 3"],
+    "correctOption": "ODS 8",
+    "tip": "O ODS 8 inclui segurança e bem-estar no ambiente de trabalho."
+  },
+  {
+    "id": "q40",
+    "difficulty": "medium",
+    "statement": "A meta 8.9 do ODS 8 trata de:",
+    "options": [
+      "Uso racional da água",
+      "Turismo sustentável e geração de empregos locais",
+      "Educação inclusiva",
+      "Redução da pobreza extrema"
+    ],
+    "correctOption": "Turismo sustentável e geração de empregos locais",
+    "tip": "A meta 8.9 promove o turismo como vetor de desenvolvimento sustentável."
+  }
+]

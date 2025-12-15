@@ -3,48 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="/Logo.png" type="image/x-icon" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <link rel="shortcut icon" href="/Logo_EconoQuiz.svg" type="image/x-icon" />
     
     <!--Page Title-->
-    <title>EconoQuiz - Jogo Educativo ODS 8</title>
-    
-    <!--Structured Data-->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "EconoQuiz",
-        "alternateName": "Quiz ODS 8 - Trabalho Decente",
-        "url": "https://www.econoquiz.ufersa.dev.br/",
-        "logo": "https://www.econoquiz.ufersa.dev.br/logo.webp",
-        "description": "Jogo educativo sobre o ODS 8: Trabalho Decente e Crescimento Econômico. Aprenda através de desafios interativos sobre direitos trabalhistas e sustentabilidade econômica.",
-        "applicationCategory": "EducationalApplication",
-        "operatingSystem": "Web",
-        "audience": {
-          "@type": "Audience",
-          "audienceType": "Estudantes, Educadores, Público Geral"
-        },
-        "educationalUse": "Aprendizagem sobre Objetivos de Desenvolvimento Sustentável",
-        "keywords": "ODS 8, trabalho decente, crescimento econômico, educação, sustentabilidade"
-      }
-    </script>
+    <title>EconoQuiz - Jogo Educativo ODS 8 | Trabalho Decente e Crescimento Econômico</title>
     
     <!--Page Description-->
     <meta name="description" content="Jogo educativo sobre o ODS 8: Trabalho Decente e Crescimento Econômico. Aprenda através de desafios interativos sobre direitos trabalhistas, crescimento econômico sustentável e como promover um mundo do trabalho mais justo." />
     
-    <meta name="google-adsense-account" content="ca-pub-7315594581672176">
-
-    <!--Keywords for SEO-->
-    <meta name="keywords" content="ODS 8, trabalho decente, crescimento econômico, educação, sustentabilidade, direitos trabalhistas, jogo educativo, quiz, desenvolvimento sustentável, emprego, economia" />
-    
     <!--Robots for Google-->
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     
-    <!--Meta Tags for Facebook-->
+    <!--Additional SEO Meta Tags-->
+    <meta name="author" content="Equipe de Desenvolvimento Educacional UFERSA">
+    <meta name="theme-color" content="#A21942">
+    <meta name="msapplication-TileColor" content="#A21942">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="EconoQuiz">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!--Google AdSense-->
+    <meta name="google-adsense-account" content="ca-pub-7315594581672176">
+    
+    <!--Meta Tags for Facebook (Open Graph)-->
     <meta property="og:site_name" content="EconoQuiz">
     <meta property="og:title" content="EconoQuiz - Jogo Educativo sobre ODS 8" />
     <meta property="og:description" content="Descubra o caminho para um trabalho justo! Jogo educativo interativo sobre trabalho decente e crescimento econômico sustentável." />
-    <meta property="og:image" content="https://www.econoquiz.ufersa.dev.br/Logo.png" />
+    <meta property="og:image" content="https://www.econoquiz.ufersa.dev.br/og-image.png" />
+    <meta property="og:image:alt" content="Logo do EconoQuiz - Jogo Educativo sobre ODS 8" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://www.econoquiz.ufersa.dev.br/" />
@@ -55,45 +49,111 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="EconoQuiz - Jogo Educativo ODS 8">
     <meta name="twitter:description" content="Aprenda sobre trabalho decente e crescimento econômico através de desafios educativos interativos.">
-    <meta name="twitter:image" content="https://www.econoquiz.ufersa.dev.br/Logo.png">
-    
-    <!--Additional SEO Meta Tags-->
-    <meta name="author" content="Equipe de Desenvolvimento Educacional">
-    <meta name="theme-color" content="#A21942">
-    <meta name="msapplication-TileColor" content="#A21942">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Trilha Trabalho Justo">
+    <meta name="twitter:image" content="https://www.econoquiz.ufersa.dev.br/og-image.png">
+    <meta name="twitter:image:alt" content="Logo do EconoQuiz">
     
     <!--Canonical URL-->
     <link rel="canonical" href="https://www.econoquiz.ufersa.dev.br/">
     
-    <!--Preconnect for performance-->
+    <!--Sitemap-->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+    
+    <!--Performance Optimization-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://vlibras.gov.br">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     
     <!--Web App Manifest-->
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.webmanifest">
     
-    <!--Educational Content Schema-->
+    <!--Structured Data - WebApplication-->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "EconoQuiz",
+        "alternateName": "Quiz ODS 8 - Trabalho Decente",
+        "url": "https://www.econoquiz.ufersa.dev.br/",
+        "logo": "https://www.econoquiz.ufersa.dev.br/logo.webp",
+        "screenshot": "https://www.econoquiz.ufersa.dev.br/screenshot.png",
+        "description": "Jogo educativo sobre o ODS 8: Trabalho Decente e Crescimento Econômico. Aprenda através de desafios interativos sobre direitos trabalhistas e sustentabilidade econômica.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "Estudantes, Educadores, Público Geral"
+        },
+        "educationalUse": "Aprendizagem sobre Objetivos de Desenvolvimento Sustentável",
+        "keywords": "ODS 8, trabalho decente, crescimento econômico, educação, sustentabilidade",
+        "inLanguage": "pt-BR",
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-08"
+      }
+    </script>
+    
+    <!--Structured Data - Course-->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Course",
         "name": "ODS 8: Trabalho Decente e Crescimento Econômico",
-        "description": "Curso interativo sobre o Objetivo de Desenvolvimento Sustentável 8",
+        "description": "Curso interativo sobre o Objetivo de Desenvolvimento Sustentável 8 através de quiz educativo",
         "provider": {
           "@type": "Organization",
-          "name": "EconoQuiz"
+          "name": "EconoQuiz",
+          "url": "https://www.econoquiz.ufersa.dev.br/",
+          "logo": "https://www.econoquiz.ufersa.dev.br/logo.webp"
         },
         "educationalLevel": "Todos os níveis",
         "inLanguage": "pt-BR",
         "courseMode": "online",
+        "isAccessibleForFree": true,
         "hasCourseInstance": {
           "@type": "CourseInstance",
           "courseMode": "online",
           "courseWorkload": "P30M"
-        }
+        },
+        "teaches": [
+          "Direitos trabalhistas",
+          "Crescimento econômico sustentável",
+          "Trabalho decente",
+          "Objetivos de Desenvolvimento Sustentável"
+        ]
+      }
+    </script>
+    
+    <!--Structured Data - Organization-->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "EconoQuiz",
+        "url": "https://www.econoquiz.ufersa.dev.br/",
+        "logo": "https://www.econoquiz.ufersa.dev.br/logo.webp",
+        "description": "Plataforma educativa focada em ODS 8",
+        "foundingDate": "2024",
+        "sameAs": []
+      }
+    </script>
+    
+    <!--Structured Data - Breadcrumb-->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.econoquiz.ufersa.dev.br/"
+        }]
       }
     </script>
   </head>
@@ -102,8 +162,6 @@
     <script type="module" src="/src/main.jsx"></script>
     
     <!--VLibras for Accessibility - Portuguese Sign Language-->
-    <div vw class="enabled">
-      <!--Added the VLibras-->
     <div vw class="enabled">
       <div
         vw-access-button
@@ -118,6 +176,8 @@
     <script>
       new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
+    
+    <!--Google AdSense-->
     <script
       data-ad-client="ca-pub-7315594581672176"
       async
