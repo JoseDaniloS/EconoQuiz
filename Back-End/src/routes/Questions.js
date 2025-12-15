@@ -34,11 +34,11 @@ router.post("/verify-answer", authToken, async (req, res) => {
     // Log completo para depuração e auditoria
     const currentQuestion = match.getCurrentQuestion();
 
-    const currectQuestionFromDatabase = await getQuestion(
+    const currentQuestionFromDatabase = await getQuestion(
       currentQuestion?.id,
       match.difficulty
     );
-    const isCorrect = currectQuestionFromDatabase.isCorrect(answer);
+    const isCorrect = currentQuestionFromDatabase.isCorrect(answer);
 
     logMessage(
       `🎮 Jogador: ${match.id_user} | Partida: ${match.id} | Questão: ${currentQuestion.id} | Resposta enviada: "${answer}"`
@@ -47,13 +47,14 @@ router.post("/verify-answer", authToken, async (req, res) => {
     let earnedPoints = 0;
 
     //Atualiza estado da partida
-    match.nextQuestion();
     if (isCorrect) {
       match.incrementCorrectStreak();
       earnedPoints = match.addScore();
     } else {
       match.resetStreak();
     }
+    
+    match.nextQuestion();
     //Atualiza no banco
     await updateMatch(match);
 
@@ -63,7 +64,7 @@ router.post("/verify-answer", authToken, async (req, res) => {
         message: "Partida finalizada!",
         isFinally: true,
         correct: isCorrect,
-        answerCorrect: currectQuestionFromDatabase.getCorrectOption(),
+        answerCorrect: currentQuestionFromDatabase.getCorrectOption(),
         earnedPoints: earnedPoints,
         results: finished,
       });
@@ -73,7 +74,7 @@ router.post("/verify-answer", authToken, async (req, res) => {
     return res.status(200).json({
       message: isCorrect ? "Acertou!" : "Errou!",
       correct: isCorrect,
-      answerCorrect: currectQuestionFromDatabase.getCorrectOption(),
+      answerCorrect: currentQuestionFromDatabase.getCorrectOption(),
       earnedPoints: earnedPoints,
       match: match.toPublicObject(),
     });

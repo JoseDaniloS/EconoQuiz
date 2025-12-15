@@ -5,6 +5,7 @@ import play from "./routes/Play.js";
 import utils from "./routes/Utils.js";
 import questions from "./routes/Questions.js";
 import ranking from "./routes/Ranking.js";
+import { sendAllQuestions } from "./Send.js";
 //import cors from "cors"
 
 dotenv.config();

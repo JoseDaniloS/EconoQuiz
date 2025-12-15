@@ -1,0 +1,252 @@
+[
+  {
+    "id": "q41",
+    "difficulty": "hard",
+    "statement": "Qual é a meta específica do ODS 8 relacionada à taxa de crescimento do PIB per capita?",
+    "options": [
+      "Crescimento de 3% ao ano para todos os países",
+      "Crescimento de 10% ao ano para países em desenvolvimento",
+      "Crescimento de 5% ao ano para países desenvolvidos",
+      "Crescimento de pelo menos 7% ao ano do PIB per capita nos países menos desenvolvidos"
+    ],
+    "correctOption": "Crescimento de pelo menos 7% ao ano do PIB per capita nos países menos desenvolvidos",
+    "tip": "ODS 8 estabelece metas específicas de crescimento econômico diferenciadas por nível de desenvolvimento dos países."
+  },
+  {
+    "id": "q42",
+    "difficulty": "hard",
+    "statement": "Qual convenção da OIT trata especificamente sobre a idade mínima para admissão ao emprego?",
+    "options": [
+      "Convenção nº 182",
+      "Convenção nº 138",
+      "Convenção nº 87",
+      "Convenção nº 29"
+    ],
+    "correctOption": "Convenção nº 138",
+    "tip": "ODS 8 promove a erradicação do trabalho infantil e o cumprimento das convenções fundamentais da OIT."
+  },
+  {
+    "id": "q43",
+    "difficulty": "hard",
+    "statement": "O que significa a taxa NEET frequentemente mencionada no contexto do ODS 8?",
+    "options": [
+      "Taxa de inovação em países emergentes",
+      "Número de empresas em economia digital",
+      "Proporção de jovens que não estão empregados, nem estudando ou em formação",
+      "Taxa de emprego em setores tecnológicos"
+    ],
+    "correctOption": "Proporção de jovens que não estão empregados, nem estudando ou em formação",
+    "tip": "ODS 8 monitora especialmente a situação dos jovens no mercado de trabalho através de indicadores como NEET."
+  },
+  {
+    "id": "q44",
+    "difficulty": "hard",
+    "statement": "Quantas pessoas estavam em situação de trabalho forçado no mundo, segundo estimativas da OIT de 2021?",
+    "options": ["50 milhões", "10 milhões", "27,6 milhões", "5 milhões"],
+    "correctOption": "27,6 milhões",
+    "tip": "ODS 8 visa erradicar o trabalho forçado, a escravidão moderna e o tráfico de pessoas até 2030."
+  },
+  {
+    "id": "q45",
+    "difficulty": "hard",
+    "statement": "Qual indicador mede a eficiência com que os insumos são convertidos em produtos na economia?",
+    "options": [
+      "Índice de Gini",
+      "Taxa de participação na força de trabalho",
+      "Taxa de desemprego estrutural",
+      "Produtividade do trabalho medida pelo PIB por trabalhador"
+    ],
+    "correctOption": "Produtividade do trabalho medida pelo PIB por trabalhador",
+    "tip": "ODS 8 busca alcançar níveis mais elevados de produtividade através da diversificação, modernização tecnológica e inovação."
+  },
+  {
+    "id": "q46",
+    "difficulty": "hard",
+    "statement": "Qual percentual aproximado da força de trabalho global estava na economia informal antes da pandemia de COVID-19?",
+    "options": ["80%", "61%", "20%", "40%"],
+    "correctOption": "61%",
+    "tip": "ODS 8 promove a formalização e o crescimento de micro, pequenas e médias empresas, incluindo acesso a serviços financeiros."
+  },
+  {
+    "id": "q47",
+    "difficulty": "hard",
+    "statement": "Qual meta do ODS 8 está diretamente relacionada ao turismo sustentável?",
+    "options": [
+      "Meta 8.3 sobre empreendedorismo",
+      "Meta 8.1 sobre crescimento econômico",
+      "Meta 8.9 sobre políticas para promover turismo sustentável que cria empregos",
+      "Meta 8.5 sobre emprego pleno e produtivo"
+    ],
+    "correctOption": "Meta 8.9 sobre políticas para promover turismo sustentável que cria empregos",
+    "tip": "ODS 8 reconhece o turismo como setor importante para criação de empregos e promoção da cultura e produtos locais."
+  },
+  {
+    "id": "q48",
+    "difficulty": "hard",
+    "statement": "O que significa 'trabalho decente' segundo a definição da OIT?",
+    "options": [
+      "Qualquer trabalho formal registrado",
+      "Apenas trabalho com salário mínimo garantido",
+      "Trabalho em empresas multinacionais",
+      "Trabalho produtivo com remuneração justa, segurança, proteção social e diálogo social"
+    ],
+    "correctOption": "Trabalho produtivo com remuneração justa, segurança, proteção social e diálogo social",
+    "tip": "ODS 8 promove o conceito de trabalho decente para todos, incluindo jovens e pessoas com deficiência."
+  },
+  {
+    "id": "q49",
+    "difficulty": "hard",
+    "statement": "Qual é o objetivo da meta 8.10 do ODS 8?",
+    "options": [
+      "Eliminar o uso de dinheiro físico",
+      "Fortalecer a capacidade das instituições financeiras para incentivar a expansão do acesso a serviços bancários",
+      "Aumentar impostos sobre grandes corporações",
+      "Reduzir o número de bancos comerciais"
+    ],
+    "correctOption": "Fortalecer a capacidade das instituições financeiras para incentivar a expansão do acesso a serviços bancários",
+    "tip": "ODS 8 promove a inclusão financeira como ferramenta essencial para o desenvolvimento econômico sustentável."
+  },
+  {
+    "id": "q50",
+    "difficulty": "hard",
+    "statement": "Qual conceito econômico está relacionado à meta 8.4 sobre eficiência no uso de recursos?",
+    "options": [
+      "Economia de subsistência",
+      "Economia linear",
+      "Economia circular e desacoplamento do crescimento econômico da degradação ambiental",
+      "Economia de escala"
+    ],
+    "correctOption": "Economia circular e desacoplamento do crescimento econômico da degradação ambiental",
+    "tip": "ODS 8 busca melhorar progressivamente a eficiência dos recursos globais no consumo e na produção."
+  },
+  {
+    "id": "q51",
+    "difficulty": "hard",
+    "statement": "Qual é a relação entre o ODS 8 e os direitos trabalhistas fundamentais?",
+    "options": [
+      "ODS 8 foca apenas em salários mínimos",
+      "ODS 8 protege direitos trabalhistas e promove ambientes de trabalho seguros para todos os trabalhadores",
+      "ODS 8 trata apenas de desemprego juvenil",
+      "ODS 8 não aborda direitos trabalhistas"
+    ],
+    "correctOption": "ODS 8 protege direitos trabalhistas e promove ambientes de trabalho seguros para todos os trabalhadores",
+    "tip": "ODS 8 inclui a meta 8.8 que visa proteger os direitos trabalhistas e promover ambientes de trabalho seguros."
+  },
+  {
+    "id": "q52",
+    "difficulty": "hard",
+    "statement": "Qual impacto a automação e a inteligência artificial têm no contexto do ODS 8?",
+    "options": [
+      "Nenhum impacto relevante",
+      "Apenas benefícios sem necessidade de adaptação",
+      "Apenas efeitos negativos na geração de empregos",
+      "Desafio de equilibrar inovação tecnológica com criação de empregos decentes e requalificação profissional"
+    ],
+    "correctOption": "Desafio de equilibrar inovação tecnológica com criação de empregos decentes e requalificação profissional",
+    "tip": "ODS 8 reconhece a necessidade de políticas que apoiem a diversificação, modernização tecnológica e inovação."
+  },
+  {
+    "id": "q53",
+    "difficulty": "hard",
+    "statement": "O que é o 'Pacto Mundial para o Emprego' da OIT, relacionado ao ODS 8?",
+    "options": [
+      "Uma taxa global sobre empresas",
+      "Um acordo comercial internacional",
+      "Uma estrutura de políticas para recuperação centrada no emprego e desenvolvimento sustentável",
+      "Um programa de intercâmbio de trabalhadores"
+    ],
+    "correctOption": "Uma estrutura de políticas para recuperação centrada no emprego e desenvolvimento sustentável",
+    "tip": "ODS 8 alinha-se com iniciativas globais da OIT para promover trabalho decente e crescimento econômico inclusivo."
+  },
+  {
+    "id": "q54",
+    "difficulty": "hard",
+    "statement": "Qual é a meta do ODS 8 relacionada ao trabalho infantil?",
+    "options": [
+      "Estabelecer idade mínima de 18 anos para trabalho",
+      "Reduzir o trabalho infantil em 50% até 2030",
+      "Permitir trabalho infantil apenas em empresas familiares",
+      "Tomar medidas imediatas para erradicar trabalho forçado, escravidão moderna, tráfico de pessoas e todas as formas de trabalho infantil até 2025"
+    ],
+    "correctOption": "Tomar medidas imediatas para erradicar trabalho forçado, escravidão moderna, tráfico de pessoas e todas as formas de trabalho infantil até 2025",
+    "tip": "ODS 8 tem metas ambiciosas e prazos específicos para erradicação das piores formas de trabalho."
+  },
+  {
+    "id": "q55",
+    "difficulty": "hard",
+    "statement": "Como o ODS 8 aborda a questão da igualdade de remuneração?",
+    "options": [
+      "Aborda apenas diferenças entre setores",
+      "Não menciona igualdade salarial",
+      "Meta 8.5 busca alcançar emprego pleno e produtivo e trabalho decente com igual remuneração para trabalho de igual valor",
+      "Foca apenas em salário mínimo nacional"
+    ],
+    "correctOption": "Meta 8.5 busca alcançar emprego pleno e produtivo e trabalho decente com igual remuneração para trabalho de igual valor",
+    "tip": "ODS 8 promove igualdade de remuneração entre homens e mulheres para trabalho de igual valor."
+  },
+  {
+    "id": "q56",
+    "difficulty": "hard",
+    "statement": "Qual é o papel das micro, pequenas e médias empresas (MPMEs) no ODS 8?",
+    "options": [
+      "Devem ser substituídas por grandes corporações",
+      "Meta 8.3 promove políticas que apoiam criação de emprego, empreendedorismo, criatividade e inovação das MPMEs",
+      "Não são mencionadas no ODS 8",
+      "São consideradas obstáculos ao crescimento"
+    ],
+    "correctOption": "Meta 8.3 promove políticas que apoiam criação de emprego, empreendedorismo, criatividade e inovação das MPMEs",
+    "tip": "ODS 8 reconhece as MPMEs como motores essenciais do crescimento econômico e criação de empregos."
+  },
+  {
+    "id": "q57",
+    "difficulty": "hard",
+    "statement": "Qual indicador mede a proporção de jovens (15-24 anos) não empregados e fora do sistema educacional?",
+    "options": [
+      "Taxa de evasão escolar",
+      "Taxa de desemprego juvenil",
+      "Índice de desenvolvimento juvenil",
+      "Taxa NEET (Not in Employment, Education or Training)"
+    ],
+    "correctOption": "Taxa NEET (Not in Employment, Education or Training)",
+    "tip": "ODS 8 monitora especificamente a situação dos jovens através de indicadores como a taxa NEET."
+  },
+  {
+    "id": "q58",
+    "difficulty": "hard",
+    "statement": "Como o ODS 8 se relaciona com a Agenda de Ação de Adis Abeba?",
+    "options": [
+      "A Agenda de Ação de Adis Abeba fornece meios de implementação financeiros para alcançar as metas do ODS 8",
+      "Apenas países africanos devem seguir ambas",
+      "Não há relação entre eles",
+      "São agendas conflitantes"
+    ],
+    "correctOption": "A Agenda de Ação de Adis Abeba fornece meios de implementação financeiros para alcançar as metas do ODS 8",
+    "tip": "ODS 8 está integrado com outras agendas globais de desenvolvimento e financiamento sustentável."
+  },
+  {
+    "id": "q59",
+    "difficulty": "hard",
+    "statement": "Qual é o conceito de 'desacoplamento' mencionado na meta 8.4?",
+    "options": [
+      "Desconexão entre educação e emprego",
+      "Separação entre países desenvolvidos e em desenvolvimento",
+      "Divisão entre setor público e privado",
+      "Separação entre crescimento econômico e degradação ambiental"
+    ],
+    "correctOption": "Separação entre crescimento econômico e degradação ambiental",
+    "tip": "ODS 8 busca crescimento econômico que não comprometa os recursos naturais e o meio ambiente."
+  },
+  {
+    "id": "q60",
+    "difficulty": "hard",
+    "statement": "Qual é a meta do ODS 8 sobre a Ajuda para o Comércio (Aid for Trade)?",
+    "options": [
+      "Criar uma moeda única global",
+      "Reduzir barreiras comerciais apenas entre países ricos",
+      "Eliminar toda ajuda internacional",
+      "Meta 8.a visa aumentar o apoio da Iniciativa de Ajuda para o Comércio para países em desenvolvimento"
+    ],
+    "correctOption": "Meta 8.a visa aumentar o apoio da Iniciativa de Ajuda para o Comércio para países em desenvolvimento",
+    "tip": "ODS 8 reconhece a importância da cooperação internacional e do comércio para o desenvolvimento econômico."
+  }
+]

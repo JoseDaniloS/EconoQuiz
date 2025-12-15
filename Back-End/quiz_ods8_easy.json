@@ -1,0 +1,247 @@
+[
+  {
+    "id": "q1",
+    "difficulty": "easy",
+    "statement": "O que significa a sigla ODS?",
+    "options": [
+      "Organização de Desenvolvimento Social",
+      "Objetivos de Desenvolvimento Social",
+      "Objetivos de Desenvolvimento Sustentável",
+      "Oficina de Desenvolvimento Sustentável"
+    ],
+    "correctOption": "Objetivos de Desenvolvimento Sustentável",
+    "tip": "Os ODS fazem parte da Agenda 2030 da ONU."
+  },
+  {
+    "id": "q2",
+    "difficulty": "easy",
+    "statement": "Quantos são os Objetivos de Desenvolvimento Sustentável da ONU?",
+    "options": ["20", "10", "17", "8"],
+    "correctOption": "17",
+    "tip": "O ODS 8 é apenas um dos 17 objetivos globais."
+  },
+  {
+    "id": "q3",
+    "difficulty": "easy",
+    "statement": "Qual é o tema principal do ODS 8?",
+    "options": [
+      "Igualdade de gênero",
+      "Trabalho decente e crescimento econômico",
+      "Educação de qualidade",
+      "Saúde e bem-estar"
+    ],
+    "correctOption": "Trabalho decente e crescimento econômico",
+    "tip": "O ODS 8 trata da geração de empregos e da economia sustentável."
+  },
+  {
+    "id": "q4",
+    "difficulty": "easy",
+    "statement": "Qual organização criou os ODS?",
+    "options": ["Banco Mundial", "OMS", "ONU", "Unicef"],
+    "correctOption": "ONU",
+    "tip": "A ONU lançou os ODS em 2015."
+  },
+  {
+    "id": "q5",
+    "difficulty": "easy",
+    "statement": "O que o ODS 8 busca promover?",
+    "options": [
+      "Privatizar serviços públicos",
+      "Aumentar o consumo de energia",
+      "Promover trabalho digno e economia sustentável",
+      "Aumentar o desemprego"
+    ],
+    "correctOption": "Promover trabalho digno e economia sustentável",
+    "tip": "O foco é garantir empregos justos e crescimento equilibrado."
+  },
+  {
+    "id": "q6",
+    "difficulty": "easy",
+    "statement": "O que é considerado trabalho decente?",
+    "options": [
+      "Trabalho infantil",
+      "Trabalho perigoso e mal remunerado",
+      "Trabalho que garante direitos e segurança",
+      "Trabalho informal e sem carteira"
+    ],
+    "correctOption": "Trabalho que garante direitos e segurança",
+    "tip": "Trabalho decente envolve remuneração justa e segurança."
+  },
+  {
+    "id": "q7",
+    "difficulty": "easy",
+    "statement": "O que o ODS 8 combate?",
+    "options": [
+      "Saúde pública",
+      "Trabalho infantil e forçado",
+      "Igualdade racial",
+      "Educação gratuita"
+    ],
+    "correctOption": "Trabalho infantil e forçado",
+    "tip": "O trabalho infantil viola os direitos humanos."
+  },
+  {
+    "id": "q8",
+    "difficulty": "easy",
+    "statement": "Qual é um exemplo de trabalho decente?",
+    "options": [
+      "Trabalho escravo",
+      "Trabalho de crianças",
+      "Trabalho perigoso e sem contrato",
+      "Trabalho com salário justo e direitos garantidos"
+    ],
+    "correctOption": "Trabalho com salário justo e direitos garantidos",
+    "tip": "O ODS 8 busca condições de trabalho justas para todos."
+  },
+  {
+    "id": "q9",
+    "difficulty": "easy",
+    "statement": "O que significa crescimento econômico sustentável?",
+    "options": [
+      "Crescimento rápido e desigual",
+      "Crescimento que beneficia todos e preserva recursos",
+      "Crescimento apenas para países ricos",
+      "Crescimento que destrói o meio ambiente"
+    ],
+    "correctOption": "Crescimento que beneficia todos e preserva recursos",
+    "tip": "Sustentável significa equilibrado e duradouro."
+  },
+  {
+    "id": "q10",
+    "difficulty": "easy",
+    "statement": "Qual desses problemas o ODS 8 tenta resolver?",
+    "options": [
+      "Doenças tropicais",
+      "Desemprego",
+      "Fome",
+      "Poluição dos oceanos"
+    ],
+    "correctOption": "Desemprego",
+    "tip": "O emprego é essencial para o crescimento econômico."
+  },
+  {
+    "id": "q11",
+    "difficulty": "easy",
+    "statement": "O ODS 8 incentiva o desenvolvimento de quais tipos de empregos?",
+    "options": [
+      "Empregos sem direitos",
+      "Empregos informais",
+      "Empregos verdes e sustentáveis",
+      "Empregos temporários"
+    ],
+    "correctOption": "Empregos verdes e sustentáveis",
+    "tip": "Empregos sustentáveis ajudam o meio ambiente e a economia."
+  },
+  {
+    "id": "q12",
+    "difficulty": "easy",
+    "statement": "Quem se beneficia de um trabalho decente?",
+    "options": [
+      "Apenas investidores",
+      "Somente o governo",
+      "Trabalhadores e sociedade",
+      "Somente as empresas"
+    ],
+    "correctOption": "Trabalhadores e sociedade",
+    "tip": "Trabalho decente melhora a qualidade de vida de todos."
+  },
+  {
+    "id": "q13",
+    "difficulty": "easy",
+    "statement": "Em que ano os ODS foram criados?",
+    "options": ["2010", "2015", "2000", "2020"],
+    "correctOption": "2015",
+    "tip": "Os ODS foram aprovados pela ONU em 2015."
+  },
+  {
+    "id": "q14",
+    "difficulty": "easy",
+    "statement": "O trabalho infantil é:",
+    "options": [
+      "Aceitável até os 14 anos",
+      "Uma violação dos direitos humanos",
+      "Uma forma de aprendizado",
+      "Permitido em todos os países"
+    ],
+    "correctOption": "Uma violação dos direitos humanos",
+    "tip": "O ODS 8 busca eliminar o trabalho infantil."
+  },
+  {
+    "id": "q15",
+    "difficulty": "easy",
+    "statement": "Quem é responsável por apoiar o cumprimento dos ODS?",
+    "options": [
+      "Apenas escolas",
+      "Apenas os governos",
+      "Todos: governos, empresas e cidadãos",
+      "Somente ONGs"
+    ],
+    "correctOption": "Todos: governos, empresas e cidadãos",
+    "tip": "Os ODS exigem cooperação global."
+  },
+  {
+    "id": "q16",
+    "difficulty": "easy",
+    "statement": "O que é desemprego?",
+    "options": [
+      "Trabalhar em dois empregos",
+      "Estar sem trabalho mesmo querendo trabalhar",
+      "Aposentar-se",
+      "Tirar férias prolongadas"
+    ],
+    "correctOption": "Estar sem trabalho mesmo querendo trabalhar",
+    "tip": "O ODS 8 busca reduzir o desemprego em todas as idades."
+  },
+  {
+    "id": "q17",
+    "difficulty": "easy",
+    "statement": "Qual desses é um exemplo de prática injusta no trabalho?",
+    "options": [
+      "Ambiente seguro",
+      "Promoção por mérito",
+      "Salário desigual entre homens e mulheres",
+      "Treinamento e capacitação"
+    ],
+    "correctOption": "Salário desigual entre homens e mulheres",
+    "tip": "O ODS 8 defende igualdade e justiça no trabalho."
+  },
+  {
+    "id": "q18",
+    "difficulty": "easy",
+    "statement": "Por que é importante ter um emprego formal?",
+    "options": [
+      "Porque não há impostos",
+      "Porque é mais fácil sair a qualquer momento",
+      "Porque dá acesso a direitos e segurança",
+      "Porque permite trabalhar sem regras"
+    ],
+    "correctOption": "Porque dá acesso a direitos e segurança",
+    "tip": "Emprego formal garante direitos e benefícios."
+  },
+  {
+    "id": "q19",
+    "difficulty": "easy",
+    "statement": "O crescimento econômico ajuda a:",
+    "options": [
+      "Aumentar o desemprego",
+      "Enfraquecer o comércio",
+      "Reduzir a pobreza",
+      "Destruir o meio ambiente"
+    ],
+    "correctOption": "Reduzir a pobreza",
+    "tip": "O crescimento econômico deve beneficiar toda a sociedade."
+  },
+  {
+    "id": "q20",
+    "difficulty": "easy",
+    "statement": "O ODS 8 está relacionado a qual dos seguintes temas?",
+    "options": [
+      "Justiça e paz",
+      "Saúde e alimentação",
+      "Trabalho e economia",
+      "Energia e meio ambiente"
+    ],
+    "correctOption": "Trabalho e economia",
+    "tip": "O ODS 8 une emprego digno e desenvolvimento econômico."
+  }
+]

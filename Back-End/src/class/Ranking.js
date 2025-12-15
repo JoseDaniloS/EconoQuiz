@@ -12,6 +12,7 @@ export class Ranking {
     this.bestScore = bestScore;
     this.bestStreak = bestStreak;
     this.difficulty = difficulty;
+    this.createdAt = new Date().toLocaleString("pt-BR")
   }
 
   static async getRanking() {
@@ -64,7 +65,7 @@ export class Ranking {
       const result = await docClient.send(command);
       const rankingItemDatabase = result.Item;
       if (rankingItem?.bestScore < rankingItemDatabase?.bestScore)
-        return new Error("Score menor que o melhor score");
+        return new Error("Score atual menor que o melhor score");
 
       const updateCommand = new PutCommand({
         TableName: TABLE_NAME_RANKING,
