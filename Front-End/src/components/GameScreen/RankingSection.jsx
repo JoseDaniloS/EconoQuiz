@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaTrophy, FaMedal, FaBolt, FaFire } from "react-icons/fa";
 import { getRankingFetch } from "../../api/RankingFetch";
 
-export default function RankingSection({ limit = 10 }) {
+export default function RankingSection({ limit = 50 }) {
   const [ranking, setRanking] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
